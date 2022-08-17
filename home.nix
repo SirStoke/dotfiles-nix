@@ -20,6 +20,7 @@ in
     pkgs.tree
     pkgs.ungoogled-chromium
     pkgs.zoxide
+    pkgs.pinentry
   ];
 
   programs.neovim.enable = true;
@@ -62,8 +63,10 @@ in
     userName = "SirStoke";
 
     signing.signByDefault = true;
-    signing.key = "9246A0D7B6627F40";
+    signing.key = "4A24C13FB5F4E06E";
   };
 
   programs.gpg.enable = true;
+
+  services.gpg-agent.enable = true;
 }
