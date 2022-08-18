@@ -7,7 +7,7 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
   
-  outputs = { self, nixpkgs, home-manager, ... }@attrs: rec {
+  outputs = { self, nixpkgs, home-manager, ... }@attrs: {
     nixosConfigurations.loki = nixpkgs.lib.nixosSystem {
       system = "aarch64-linux";
       specialArgs = attrs;
@@ -17,9 +17,15 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.sandro = import ./home.nix;
+          home-manager.users.sandro = import ./home-nixos.nix;
         }
       ];
     };
+
+    homeConfigurations.sandro-darwin = home-manager.lib.homeManagerConfiguration {
+      inherit pkgs;
+
+      modules = [ ./home-darwin.nix ]; 
+    }
   };
 }

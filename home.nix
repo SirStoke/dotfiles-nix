@@ -20,8 +20,6 @@ in
     pkgs.tree
     pkgs.ungoogled-chromium
     pkgs.zoxide
-    pkgs.pinentry
-    pkgs.libsForQt5.bismuth
   ];
 
   programs.neovim.enable = true;
@@ -57,24 +55,4 @@ in
     custom = "$HOME/.zsh-custom";
     theme = "lambda-gitster";
   };
-
-  programs.git = {
-    enable = true;
-    userEmail = "sandro.mosca.dev@gmail.com";
-    userName = "SirStoke";
-
-    signing.signByDefault = true;
-    signing.key = "4A24C13FB5F4E06E";
-  };
-
-  programs.gpg.enable = true;
-
-  services.gpg-agent = {
-    enable = true;
-
-    # cache the keys forever so we don't get asked for a password
-    defaultCacheTtl = 31536000;
-    maxCacheTtl = 31536000;
-  };
-
 }
