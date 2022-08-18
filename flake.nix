@@ -23,9 +23,9 @@
     };
 
     homeConfigurations.sandro-darwin = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
+      pkgs = nixpkgs;
 
       modules = [ ./home-darwin.nix ]; 
-    }
+    };
   };
 }

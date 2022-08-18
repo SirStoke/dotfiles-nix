@@ -1,10 +1,10 @@
 { config, pkgs, ... }:
 
 let
-  base = import ./home.nix { config pkgs };
+  base = import ./home.nix { inherit config pkgs; };
 in
   base // {
-    home.packages = base.packages ++ [ pkgs.libsForQt5.bismuth pkgs.pinentry ];
+    home.packages = base.home.packages ++ [ pkgs.libsForQt5.bismuth pkgs.pinentry ];
 
     programs.git = {
       enable = true;

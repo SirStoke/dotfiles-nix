@@ -1,1 +1,1 @@
-{ config, pkgs, ... }: import ./home.nix { config pkgs }
+{ config, pkgs, ... }: import ./home.nix { inherit config pkgs }
