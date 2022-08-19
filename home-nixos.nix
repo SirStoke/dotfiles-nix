@@ -3,8 +3,8 @@
 let
   base = import ./home.nix { inherit config pkgs; };
 in
-  base // {
-    home.packages = base.home.packages ++ [ pkgs.libsForQt5.bismuth pkgs.pinentry ];
+  pkgs.lib.recursiveUpdate base {
+    home.packages = base.home.packages ++ [ pkgs.libsForQt5.bismuth pkgs.pinentry pkgs.ungoogled-chromium ];
 
     programs.git = {
       enable = true;

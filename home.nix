@@ -7,9 +7,18 @@ let
     rev = "bc9cb4948920d9cbb72c3b78d18070d1cc94934b";
     sha256 = "sha256-W75QtuA0ChmHsbfazlZtLwi4jKt9LoseRTQvvCw4ocM=";
   };
+
+  base16-shell = pkgs.fetchFromGitHub {
+    owner = "chriskempson";
+    repo = "base16-shell";
+    rev = "cd71822de1f9b53eea9beb9d94293985e9ad7122";
+    sha256 = "sha256-mXCC7lT2KXySn5vSK8huLFYObWA0mD3jp/WQU6iM9Vo=";
+  };
 in
 {
   xdg.enable = true;
+
+  nixpkgs.config.allowUnsupportedSystem = true;
 
   home.file.".zsh-custom/themes/lambda-gitster.zsh-theme".source = "${lambda-gitster}/lambda-gitster.zsh-theme";
 
@@ -18,7 +27,6 @@ in
     pkgs.ripgrep
     pkgs.jq
     pkgs.tree
-    pkgs.ungoogled-chromium
     pkgs.zoxide
   ];
 
@@ -46,7 +54,12 @@ in
 
   programs.zsh = {
     enable = true;
-    initExtra = builtins.readFile ./home/init.zsh;
+    initExtra = (builtins.readFile ./home/init.zsh) + ''
+      BASE16_SHELL="${base16-shell}"
+      [ -n "$PS1" ] && \
+          [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+              eval "$("$BASE16_SHELL/profile_helper.sh")"
+    '';
   };
 
   programs.zsh.oh-my-zsh = {
