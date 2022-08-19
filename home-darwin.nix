@@ -6,6 +6,10 @@
 
     programs.home-manager.enable = true;
 
+    home.packages = base.home.packages ++ (
+      with pkgs; [ iterm2 ]
+    );
+
     # Eventually, both sdkman and fnm will not be needed and everything will be managed by per-project nix flakes
     programs.zsh.initExtra = base.programs.zsh.initExtra + ''
       export SDKMAN_DIR="$HOME/.sdkman"
