@@ -18,7 +18,13 @@
       # fnm
       export PATH=/Users/sandro/.fnm:$PATH
       eval "`fnm env`"
+
+      source ~/.zsh_work_env
     '';
+
+    programs.zsh.shellAliases = {
+      hm-switch = "cd ~/.config/nixpkgs && nix flake update && home-manager switch; cd -";
+    };
 
     homebrew = {
       enable = true;
@@ -29,6 +35,7 @@
         "vault"
         "fnm"
         "brotli"
+        "aria2"
       ];
 
       casks = [
