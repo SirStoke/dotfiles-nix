@@ -63,6 +63,20 @@ in
     '';
   };
 
+  programs.git = {
+    enable = true;
+    userEmail = "sandro.mosca.dev@gmail.com";
+    userName = "SirStoke";
+
+    signing.signByDefault = true;
+    signing.key = "4A24C13FB5F4E06E";
+
+    difftastic.enable = true;
+    lfs.enable = true;
+
+    extraConfig.url."git@github.com:".insteadOf = https://github.com/;
+  };
+
   programs.zsh.oh-my-zsh = {
     enable = true;
     plugins = [ "git" "node" "npm" "nvm" "scala" "sbt" "pip" "github" "vundle" "gpg-agent" "git-lfs" "iterm2" "macos" "sdk" "docker" "docker-compose" "rust" "aws" ];

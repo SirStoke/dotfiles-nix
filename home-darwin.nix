@@ -2,6 +2,8 @@
   let 
     base = import ./home.nix { inherit config pkgs; };
   in recursiveUpdate base {
+    xdg.enable = false;
+
     imports = [ ./modules/homebrew.nix ];
 
     programs.home-manager.enable = true;
@@ -21,6 +23,15 @@
 
       source ~/.zsh_work_env
     '';
+
+    programs.git = base.programs.git // {
+      includes = [
+        { 
+          condition = "gitdir:~/src/work/";
+          path = "~/.gitconfig-work";
+        }
+      ];
+    };
 
     programs.zsh.shellAliases = {
       hm-switch = "cd ~/.config/nixpkgs && nix flake update && home-manager switch; cd -";

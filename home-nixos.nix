@@ -6,15 +6,6 @@ in
   pkgs.lib.recursiveUpdate base {
     home.packages = base.home.packages ++ [ pkgs.libsForQt5.bismuth pkgs.pinentry pkgs.ungoogled-chromium ];
 
-    programs.git = {
-      enable = true;
-      userEmail = "sandro.mosca.dev@gmail.com";
-      userName = "SirStoke";
-
-      signing.signByDefault = true;
-      signing.key = "4A24C13FB5F4E06E";
-    };
-
     programs.gpg.enable = true;
 
     services.gpg-agent = {
