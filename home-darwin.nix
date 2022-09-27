@@ -9,7 +9,7 @@
     programs.home-manager.enable = true;
 
     home.packages = base.home.packages ++ (
-      with pkgs; [ iterm2 ]
+      with pkgs; [ iterm2 postgresql ]
     );
 
     # Eventually, fnm will not be needed and everything will be managed by per-project nix flakes
