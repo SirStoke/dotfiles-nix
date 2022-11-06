@@ -9,6 +9,7 @@ in
       pinentry 
       ungoogled-chromium 
       xclip
+      noisetorch
     ]);
 
     programs.gpg.enable = true;
