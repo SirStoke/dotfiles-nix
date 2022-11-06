@@ -1,10 +1,15 @@
-{ config, pkgs, ... }:
+{ config, pkgs, recursiveUpdate, ... }:
 
 let
   base = import ./home.nix { inherit config pkgs; };
 in
-  pkgs.lib.recursiveUpdate base {
-    home.packages = base.home.packages ++ [ pkgs.libsForQt5.bismuth pkgs.pinentry pkgs.ungoogled-chromium ];
+  recursiveUpdate base {
+    home.packages = base.home.packages ++ (with pkgs; [ 
+      libsForQt5.bismuth 
+      pinentry 
+      ungoogled-chromium 
+      xclip
+    ]);
 
     programs.gpg.enable = true;
 

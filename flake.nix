@@ -22,6 +22,21 @@
       ];
     };
 
+    nixosConfigurations.mjollnir = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = attrs;
+      modules = [
+        ./modules-mjollnir
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.sandro = import ./home-nixos.nix;
+          home-manager.extraSpecialArgs = { recursiveUpdate = nixpkgs.lib.recursiveUpdate; };
+        }
+      ];
+    };
+
     homeConfigurations.sandro-darwin = 
       let 
         unsupportedPkgs = import nixpkgs { system = "aarch64-darwin"; config.allowUnsupportedSystem = true; };
