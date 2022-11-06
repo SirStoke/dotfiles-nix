@@ -12,6 +12,7 @@ in
       noisetorch
       terminator
       powerline-fonts
+      signal-desktop
     ]) ++ (with master-pkgs; [discord]);
 
     programs.zsh.initExtra = base.programs.zsh.initExtra + ''
