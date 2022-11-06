@@ -1,5 +1,6 @@
 {
   inputs.nixpkgs.url = github:NixOS/nixpkgs/nixos-22.05;
+  inputs.master-nixpkgs.url = github:NixOS/nixpkgs/master;
 
   inputs.home-manager = {
     url = github:nix-community/home-manager/release-22.05;
@@ -7,7 +8,7 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
   
-  outputs = { self, nixpkgs, home-manager, ... }@attrs: {
+  outputs = { self, nixpkgs, master-nixpkgs, home-manager, ... }@attrs: {
     nixosConfigurations.loki = nixpkgs.lib.nixosSystem {
       system = "aarch64-linux";
       specialArgs = attrs;
@@ -22,20 +23,26 @@
       ];
     };
 
-    nixosConfigurations.mjollnir = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = attrs;
-      modules = [
-        ./modules-mjollnir
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.sandro = import ./home-nixos.nix;
-          home-manager.extraSpecialArgs = { recursiveUpdate = nixpkgs.lib.recursiveUpdate; };
-        }
-      ];
-    };
+    nixosConfigurations.mjollnir = 
+      let
+        system = "x86_64-linux";
+        master-pkgs = import master-nixpkgs { inherit system; config.allowUnfree = true; };
+      in 
+      nixpkgs.lib.nixosSystem {
+        inherit system;
+
+        specialArgs = attrs;
+        modules = [
+          ./modules-mjollnir
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.sandro = import ./home-nixos.nix;
+            home-manager.extraSpecialArgs = { inherit master-pkgs; recursiveUpdate = nixpkgs.lib.recursiveUpdate; };
+          }
+        ];
+      };
 
     homeConfigurations.sandro-darwin = 
       let 

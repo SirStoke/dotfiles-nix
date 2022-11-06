@@ -1,4 +1,4 @@
-{ config, pkgs, recursiveUpdate, ... }:
+{ config, pkgs, master-pkgs, recursiveUpdate, ... }:
 
 let
   base = import ./home.nix { inherit config pkgs; };
@@ -10,7 +10,13 @@ in
       ungoogled-chromium 
       xclip
       noisetorch
-    ]);
+      terminator
+      powerline-fonts
+    ]) ++ (with master-pkgs; [discord]);
+
+    programs.zsh.initExtra = base.programs.zsh.initExtra + ''
+      alias nrs="sudo nixos-rebuild switch --flake '$HOME/src/dotfiles-nix#mjollnir'"
+    '';
 
     programs.gpg.enable = true;
 
