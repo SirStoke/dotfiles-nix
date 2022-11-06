@@ -9,11 +9,10 @@ in
       pinentry 
       ungoogled-chromium 
       xclip
-      noisetorch
       terminator
       powerline-fonts
       signal-desktop
-    ]) ++ (with master-pkgs; [discord]);
+    ]) ++ (with master-pkgs; [ discord ]);
 
     programs.zsh.initExtra = base.programs.zsh.initExtra + ''
       alias nrs="sudo nixos-rebuild switch --flake '$HOME/src/dotfiles-nix#mjollnir'"

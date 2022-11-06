@@ -5,5 +5,6 @@
     ./base.nix
     ./zfs.nix
     ./hardware-configuration.nix
+    ./noisetorch.nix
   ];
 }
