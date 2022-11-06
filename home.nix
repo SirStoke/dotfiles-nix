@@ -21,6 +21,7 @@ in
   nixpkgs.config.allowUnsupportedSystem = true;
 
   home.file.".zsh-custom/themes/lambda-gitster.zsh-theme".source = "${lambda-gitster}/lambda-gitster.zsh-theme";
+  home.file.".base16_theme".source = "${base16-shell}/scripts/base16-ocean.sh";
   home.file.".ideavimrc".text = builtins.readFile ./home/.ideavimrc;
 
   home.packages = [
