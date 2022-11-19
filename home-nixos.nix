@@ -12,6 +12,9 @@ in
       terminator
       powerline-fonts
       signal-desktop
+      spotify
+      qbittorrent
+      lutris
     ]) ++ (with master-pkgs; [ discord ]);
 
     programs.zsh.initExtra = base.programs.zsh.initExtra + ''
