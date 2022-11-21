@@ -15,7 +15,7 @@ in
       spotify
       qbittorrent
       lutris
-    ]) ++ (with master-pkgs; [ discord ]);
+    ]) ++ (with master-pkgs; [ discord protonvpn-gui ]);
 
     programs.zsh.initExtra = base.programs.zsh.initExtra + ''
       alias nrs="sudo nixos-rebuild switch --flake '$HOME/src/dotfiles-nix#mjollnir'"
