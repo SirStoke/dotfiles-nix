@@ -32,6 +32,8 @@ in
     pkgs.zoxide
   ];
 
+  home.stateVersion = "22.11";
+
   programs.neovim.enable = true;
   programs.neovim.vimAlias = true;
 
