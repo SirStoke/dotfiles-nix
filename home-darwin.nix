@@ -2,6 +2,10 @@
   let 
     base = import ./home.nix { inherit config pkgs; };
   in recursiveUpdate base {
+    home.homeDirectory = "/users/Sandro";
+    home.username = "sandro";
+    home.stateVersion = "22.11";
+
     xdg.enable = false;
 
     imports = [ ./modules/homebrew.nix ];
