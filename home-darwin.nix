@@ -1,7 +1,40 @@
 { config, pkgs, recursiveUpdate, ... }: 
   let 
     base = import ./home.nix { inherit config pkgs; };
+
+    raycastLayout = name: let
+      escaped = builtins.replaceStrings [" "] ["%20"] name;
+    in
+      {
+        text = ''
+          #!/bin/bash
+
+          # Required parameters:
+          # @raycast.schemaVersion 1
+          # @raycast.title Switch to ${name} layout
+          # @raycast.mode silent
+
+          # Optional parameters:
+          # @raycast.icon 🤖
+
+          open -g "rectangle-pro://execute-layout?name=${escaped}"
+        ''; 
+
+        executable = true;
+      };
+
+    raycastLayoutScript = name: "Documents/" + pkgs.lib.strings.toLower (builtins.replaceStrings [" "] ["-"] name) + ".sh";
+
+    layouts = 
+      pkgs.lib.lists.foldr 
+        (a: b: b // { ${raycastLayoutScript a} = raycastLayout a; })
+        {}
+        [ "Personal Chores" "Daily Bot" "Daily" "Coding" "Coding Laptop" "Meeting" ];
   in recursiveUpdate base {
+    home.homeDirectory = "/users/Sandro";
+    home.username = "sandro";
+    home.stateVersion = "22.11";
+
     xdg.enable = false;
 
     imports = [ ./modules/homebrew.nix ];
@@ -20,6 +53,8 @@
 
       source ~/.zsh_work_env
     '';
+
+    home.file = base.home.file // layouts;
 
     programs.git = base.programs.git // {
       includes = [
