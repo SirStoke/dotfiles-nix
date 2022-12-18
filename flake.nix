@@ -7,8 +7,10 @@
 
     inputs.nixpkgs.follows = "nixpkgs";
   };
+
+  inputs.flake-utils.url = "github:numtide/flake-utils";
   
-  outputs = { self, nixpkgs, master-nixpkgs, home-manager, ... }@attrs: {
+  outputs = { self, nixpkgs, master-nixpkgs, home-manager, flake-utils, ... }@attrs: {
     nixosConfigurations.loki = nixpkgs.lib.nixosSystem {
       system = "aarch64-linux";
       specialArgs = attrs;
@@ -57,5 +59,17 @@
 
           modules = [ ./home-darwin.nix ]; 
         };
-  };
+
+      } // flake-utils.lib.eachDefaultSystem (system: {
+        # Idea 2022.3, not yet available on nixpkgs
+        packages.idea-ultimate =
+          let 
+            pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
+          in
+            pkgs.jetbrains.idea-ultimate.overrideAttrs (final: previous: {
+              pname = "idea";
+              src = pkgs.fetchurl { url = "https://download.jetbrains.com/idea/ideaIU-2022.3-aarch64.dmg"; sha256 = "sha256-2IW1c0Qur/zNMMKRryKOXVcYv/LCNyLIzaLRviVUls8=";};
+              version = "2022.3";
+            });
+      });
 }
