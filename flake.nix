@@ -41,6 +41,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.sandro = import ./home-nixos.nix;
+            home-manager.users.sandro-gaming = import ./home-nixos.nix;
             home-manager.extraSpecialArgs = { inherit master-pkgs; recursiveUpdate = nixpkgs.lib.recursiveUpdate; };
           }
         ];
