@@ -61,16 +61,25 @@
           modules = [ ./home-darwin.nix ]; 
         };
 
-      } // flake-utils.lib.eachDefaultSystem (system: {
-        # Idea 2022.3, not yet available on nixpkgs
-        packages.idea-ultimate =
-          let 
-            pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
-          in
-            pkgs.jetbrains.idea-ultimate.overrideAttrs (final: previous: {
-              pname = "idea";
-              src = pkgs.fetchurl { url = "https://download.jetbrains.com/idea/ideaIU-2022.3-aarch64.dmg"; sha256 = "sha256-2IW1c0Qur/zNMMKRryKOXVcYv/LCNyLIzaLRviVUls8=";};
-              version = "2022.3";
-            });
-      });
+      # Idea 2022.3, not yet available on nixpkgs
+      packages.aarch64-darwin.idea-ultimate =
+        let 
+          pkgs = import nixpkgs { system = "aarch64-darwin"; config.allowUnfree = true; };
+        in
+          pkgs.jetbrains.idea-ultimate.overrideAttrs (final: previous: {
+            pname = "idea";
+            src = pkgs.fetchurl { url = "https://download.jetbrains.com/idea/ideaIU-2022.3-aarch64.dmg"; sha256 = "sha256-2IW1c0Qur/zNMMKRryKOXVcYv/LCNyLIzaLRviVUls8=";};
+            version = "2022.3";
+          });
+
+      packages.x86_64-linux.idea-ultimate =
+        let 
+          pkgs = import nixpkgs { system = "x86_64-linux"; config.allowUnfree = true; };
+        in
+          pkgs.jetbrains.idea-ultimate.overrideAttrs (final: previous: {
+            pname = "idea";
+            src = pkgs.fetchurl { url = "https://download.jetbrains.com/idea/ideaIU-2022.3.tar.gz"; sha256 = "9675c15bea4b3d0e2b00265f1b4c7c775f4187cfda9b894b4109c90ceb8e3061"; };
+            version = "2022.3";
+          });
+      };
 }
