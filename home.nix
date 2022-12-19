@@ -80,6 +80,7 @@ in
     lfs.enable = true;
 
     extraConfig.url."git@github.com:".insteadOf = https://github.com/;
+    extraConfig.url."https://github.com/rust-lang/crates.io-index".insteadOf = https://github.com/rust-lang/crates.io-index;
   };
 
   programs.zsh.oh-my-zsh = {
