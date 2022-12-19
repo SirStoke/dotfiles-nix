@@ -15,6 +15,7 @@ in
       spotify
       qbittorrent
       lutris
+      jetbrains-mono
     ]) ++ (with master-pkgs; [ discord protonvpn-gui ]);
 
     programs.zsh.initExtra = base.programs.zsh.initExtra + ''
