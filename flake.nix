@@ -10,7 +10,7 @@
 
   inputs.flake-utils.url = "github:numtide/flake-utils";
   
-  outputs = { self, nixpkgs, master-nixpkgs, home-manager, flake-utils, ... }@attrs: {
+  outputs = { self, nixpkgs, master-nixpkgs, home-manager, flake-utils, ... }@attrs: rec {
     nixosConfigurations.loki = nixpkgs.lib.nixosSystem {
       system = "aarch64-linux";
       specialArgs = attrs;
@@ -61,6 +61,60 @@
           modules = [ ./home-darwin.nix ]; 
         };
 
+      
+      packages.x86_64-linux.jetbrains-jdk = 
+        let 
+          pkgs = import nixpkgs { system = "x86_64-linux"; config.allowUnfree = true; };
+        in
+          pkgs.jetbrains.jdk.overrideAttrs (final: prev: rec {
+            font-conf = ''
+              <?xml version="1.0"?>
+              <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+              <fontconfig>
+                <!-- Original Config -->
+                <!--
+                <match target="font">
+                  <test name="family" qual="all" compare="not_eq">
+                    <string>Consolas</string>
+                  </test>
+                  <test name="family" qual="all" compare="not_eq">
+                    <string>Noto Sans Mono CJK JP</string>
+                  </test>
+                  <test name="size" qual="any" compare="less">
+                    <double>12</double>
+                  </test>
+                  <test name="weight" compare="less">
+                    <const>medium</const>
+                  </test>
+                  <edit mode="assign" name="hintstyle">
+                    <const>hintfull</const>
+                  </edit>
+                </match>
+                -->
+                
+                <match target="pattern">
+                  <edit name="hintstyle" mode="assign">
+                    <const>hintslight</const>
+                  </edit>
+                  <edit name="antialias" mode="assign">
+                    <bool>true</bool>
+                  </edit>
+                  <edit name="rgba" mode="assign">
+                      <const>rgb</const>
+                  </edit>
+                </match>
+              </fontconfig>
+            '';
+
+            installPhase = prev.installPhase + ''
+              runHook postInstall
+            '';
+
+            postInstall = ''
+              echo '${font-conf}' > $out/lib/openjdk/lib/fonts/font.conf
+            '';
+          });
+
       # Idea 2022.3, not yet available on nixpkgs
       packages.aarch64-darwin.idea-ultimate =
         let 
@@ -79,6 +133,8 @@
           pkgs.jetbrains.idea-ultimate.overrideAttrs (final: previous: {
             pname = "idea";
             src = pkgs.fetchurl { url = "https://download.jetbrains.com/idea/ideaIU-2022.3.tar.gz"; sha256 = "9675c15bea4b3d0e2b00265f1b4c7c775f4187cfda9b894b4109c90ceb8e3061"; };
+            vmopts = "-Djava2d.font.loadFontConf=false"; # And grayscale AA set in the editor
+            jdk = packages.x86_64-linux.jetbrains-jdk;
             version = "2022.3";
           });
       };

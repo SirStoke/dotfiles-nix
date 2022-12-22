@@ -31,4 +31,6 @@ in
       defaultCacheTtl = 31536000;
       maxCacheTtl = 31536000;
     };
+
+    fonts.fontconfig.enable = false;
   }
