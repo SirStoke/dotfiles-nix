@@ -22,6 +22,8 @@ in
       alias nrs="sudo nixos-rebuild switch --flake '$HOME/src/dotfiles-nix#mjollnir'"
     '';
 
+    home.file."/home/sandro/.config/terminator/config".text = builtins.readFile ./home/terminator-config;
+
     programs.gpg.enable = true;
 
     services.gpg-agent = {

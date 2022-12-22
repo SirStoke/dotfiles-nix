@@ -1,0 +1,23 @@
+[global_config]
+[keybindings]
+  split_horiz = <Primary>underscore
+  split_vert = <Primary>bar
+  resize_left = <Primary>parenright
+  resize_right = <Primary>asterisk
+  next_tab = <Primary><Shift>Right
+  prev_tab = <Primary><Shift>Left
+[profiles]
+  [[default]]
+    cursor_color = "#aaaaaa"
+    font = Source Code Pro for Powerline 10
+    show_titlebar = False
+    use_system_font = False
+[layouts]
+  [[default]]
+    [[[window0]]]
+      type = Window
+      parent = ""
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+[plugins]
