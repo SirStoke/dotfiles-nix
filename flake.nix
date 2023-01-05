@@ -11,20 +11,6 @@
   inputs.flake-utils.url = "github:numtide/flake-utils";
   
   outputs = { self, nixpkgs, master-nixpkgs, home-manager, flake-utils, ... }@attrs: rec {
-    nixosConfigurations.loki = nixpkgs.lib.nixosSystem {
-      system = "aarch64-linux";
-      specialArgs = attrs;
-      modules = [ 
-        ./modules
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.sandro = import ./home-nixos.nix;
-        }
-      ];
-    };
-
     nixosConfigurations.mjollnir = 
       let
         system = "x86_64-linux";
@@ -35,7 +21,7 @@
 
         specialArgs = attrs;
         modules = [
-          ./modules-mjollnir
+          ./modules
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;

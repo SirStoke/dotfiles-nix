@@ -4,20 +4,17 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports = [ ];
+  imports =
+    [ (modulesPath + "/installer/scan/not-detected.nix")
+    ];
 
-  boot.initrd.availableKernelModules = [ "uhci_hcd" "ahci" "xhci_pci" "nvme" "usbhid" "sr_mod" ];
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
     { device = "rpool/nixos/root";
-      fsType = "zfs"; options = [ "zfsutil" "X-mount.mkdir" ];
-    };
-
-  fileSystems."/var/log" =
-    { device = "rpool/nixos/var/log";
       fsType = "zfs"; options = [ "zfsutil" "X-mount.mkdir" ];
     };
 
@@ -31,24 +28,38 @@
       fsType = "zfs"; options = [ "zfsutil" "X-mount.mkdir" ];
     };
 
-  fileSystems."/boot/efis/nvme-VMware_Virtual_NVMe_Disk_VMware_NVME_0000-part1" =
-    { device = "/dev/disk/by-uuid/C78D-56A0";
+  fileSystems."/var/log" =
+    { device = "rpool/nixos/var/log";
+      fsType = "zfs"; options = [ "zfsutil" "X-mount.mkdir" ];
+    };
+
+  fileSystems."/boot" =
+    { device = "bpool/nixos/root";
+      fsType = "zfs"; options = [ "zfsutil" "X-mount.mkdir" ];
+    };
+
+  fileSystems."/boot/efis/nvme-Samsung_SSD_970_EVO_Plus_1TB_S4EWNM0R107119B-part1" =
+    { device = "/dev/disk/by-uuid/CA15-A23C";
       fsType = "vfat";
     };
 
   fileSystems."/boot/efi" =
-    { device = "/boot/efis/nvme-VMware_Virtual_NVMe_Disk_VMware_NVME_0000-part1";
+    { device = "/boot/efis/nvme-Samsung_SSD_970_EVO_Plus_1TB_S4EWNM0R107119B-part1";
       fsType = "none";
       options = [ "bind" ];
     };
 
-  swapDevices = [ ];
+  swapDevices = [ { device = "/dev/nvme0n1p4"; } ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.ens160.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp5s0.useDHCP = lib.mkDefault true;
 
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  # high-resolution display
+  hardware.video.hidpi.enable = lib.mkDefault true;
+  hardware.bluetooth.enable = true;
 }

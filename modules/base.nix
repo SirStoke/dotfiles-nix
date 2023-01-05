@@ -1,16 +1,27 @@
 { config, pkgs, ... }:
 
 {
+  nixpkgs.config.allowUnfree = true;
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  users.users.root.initialHashedPassword = "$6$64JC3IgzLnlXjEm.$Ge4eBdHCioOV4otDyTn7pWYcbgo.r8x2kcktwBFh1L5Z.unObG5KYa4I4tXtOFQo3wca5Gi9CIQaqUMsM8S2M0";
 
-  networking.hostName = "loki";
+  networking.hostName = "mjollnir";
+  networking.networkmanager.enable = true;
 
   time.timeZone = "Europe/Rome";
 
   users.mutableUsers = false;
 
   users.users.sandro = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" ];
+    shell = pkgs.zsh;
+    hashedPassword = "$6$nlzgALREFEkm.Ldo$SK7SGTdlawCbe1DelOg8qxvBOXcdFLvU/xqUN/tNgsFtjO/EOmSKK5tFVt7ajTrwy2Vf.OlnWFc5S4Lsn4Ye0/";
+  };
+
+  users.users.sandro-gaming = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ];
     shell = pkgs.zsh;
@@ -26,12 +37,35 @@
 
   services.xserver.desktopManager.plasma5.enable = true;
 
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  # Packages are mainly installed by home-manager, this is the strict necessary
   environment.systemPackages = with pkgs; [
-    vim 
+    vim
   ];
+
+  services.openssh.enable = true;
+  services.openssh.passwordAuthentication = true;
+  services.openssh.permitRootLogin = "yes";
+
+  boot.extraModulePackages = [ config.boot.kernelPackages.rtl88x2bu ];
+  environment.shells = [ pkgs.zsh ];
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+  };
+
+  security.rtkit.enable = true;
+
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+
+  services.blueman.enable = true;
+
+  fonts.fontconfig.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
