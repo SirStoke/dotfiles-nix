@@ -16,6 +16,7 @@ in
       qbittorrent
       lutris
       jetbrains-mono
+      syncthing
     ]) ++ (with master-pkgs; [ discord protonvpn-gui ]);
 
     programs.zsh.initExtra = base.programs.zsh.initExtra + ''
@@ -35,4 +36,5 @@ in
     };
 
     fonts.fontconfig.enable = false;
+    services.syncthing.enable = true;
   }
