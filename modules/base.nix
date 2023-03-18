@@ -46,7 +46,12 @@
   services.openssh.passwordAuthentication = true;
   services.openssh.permitRootLogin = "yes";
 
+  # Must stay on 5.x until 6.2 gets ZFS support because of rtl88x2bu breaking otherwise
+  # Delete the next line and uncomment the boot.kernelPackage entry on zfs.nix once that happens
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_5_15;
+
   boot.extraModulePackages = [ config.boot.kernelPackages.rtl88x2bu ];
+
   environment.shells = [ pkgs.zsh ];
 
   programs.steam = {
@@ -66,6 +71,7 @@
   services.blueman.enable = true;
 
   fonts.fontconfig.enable = true;
+
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
