@@ -71,6 +71,7 @@
   services.blueman.enable = true;
 
   fonts.fontconfig.enable = true;
+  fonts.fontconfig.hinting.enable = false;
 
 
   # This value determines the NixOS release from which the default
