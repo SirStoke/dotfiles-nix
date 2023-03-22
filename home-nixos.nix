@@ -7,7 +7,7 @@ in
     home.packages = base.home.packages ++ (with pkgs; [ 
       libsForQt5.bismuth 
       pinentry 
-      ungoogled-chromium 
+      (pkgs.ungoogled-chromium.override { commandLineArgs = [ "--force-dark-mode" ]; })
       xclip
       terminator
       powerline-fonts
@@ -17,7 +17,7 @@ in
       lutris
       jetbrains-mono
       syncthing
-    ]) ++ (with master-pkgs; [ discord protonvpn-gui ]);
+    ]) ++ (with master-pkgs; [ discord protonvpn-gui obsidian dropbox ]);
 
     programs.zsh.initExtra = base.programs.zsh.initExtra + ''
       alias nrs="sudo nixos-rebuild switch --flake '$HOME/src/dotfiles-nix#mjollnir'"
