@@ -108,8 +108,8 @@
         in
           pkgs.jetbrains.idea-ultimate.overrideAttrs (final: previous: {
             pname = "idea";
-            src = pkgs.fetchurl { url = "https://download.jetbrains.com/idea/ideaIU-2022.3.2-aarch64.dmg"; sha256 = "sha256-6m2hcvyPJ7e61UdfDh/DNZxJKIW7qLbeWb5yfLe2UoQ=";};
-            version = "2022.3.2";
+            src = pkgs.fetchurl { url = "https://download.jetbrains.com/idea/ideaIU-2022.3.3-aarch64.dmg"; sha256 = "sha256-Yn/fCBj4Kf+jxjJ11REoyiPye8qZRVCOR0NxaFYykEM";};
+            version = "2022.3.3";
           });
 
       packages.x86_64-linux.idea-ultimate =
