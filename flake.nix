@@ -104,12 +104,12 @@
       # Idea 2022.3, not yet available on nixpkgs
       packages.aarch64-darwin.idea-ultimate =
         let 
-          pkgs = import nixpkgs { system = "aarch64-darwin"; config.allowUnfree = true; };
+          pkgs = import master-nixpkgs { system = "aarch64-darwin"; config.allowUnfree = true; };
         in
           pkgs.jetbrains.idea-ultimate.overrideAttrs (final: previous: {
             pname = "idea";
-            src = pkgs.fetchurl { url = "https://download.jetbrains.com/idea/ideaIU-2022.3.3-aarch64.dmg"; sha256 = "sha256-Yn/fCBj4Kf+jxjJ11REoyiPye8qZRVCOR0NxaFYykEM";};
-            version = "2022.3.3";
+            src = pkgs.fetchurl { url = "https://download.jetbrains.com/idea/ideaIU-2023.1.2-aarch64.dmg"; sha256 = "sha256-2K6Trel93TDJH9KoKHY7HJUujCBvBPvbnXnqIgeVWo4="; };
+            version = "2023.1.2";
           });
 
       packages.x86_64-linux.idea-ultimate =
