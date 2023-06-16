@@ -12,6 +12,9 @@
 
   time.timeZone = "Europe/Rome";
 
+  services.plex.enable = true;
+  services.plex.openFirewall = true;
+
   users.mutableUsers = false;
 
   users.users.sandro = {
