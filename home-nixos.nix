@@ -17,6 +17,7 @@ in
       lutris
       jetbrains-mono
       syncthing
+      vscode-fhs
     ]) ++ (with master-pkgs; [ discord protonvpn-gui obsidian dropbox ]);
 
     programs.zsh.initExtra = base.programs.zsh.initExtra + ''
