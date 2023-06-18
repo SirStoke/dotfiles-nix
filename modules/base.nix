@@ -19,14 +19,14 @@
 
   users.users.sandro = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" ];
     shell = pkgs.zsh;
     hashedPassword = "$6$nlzgALREFEkm.Ldo$SK7SGTdlawCbe1DelOg8qxvBOXcdFLvU/xqUN/tNgsFtjO/EOmSKK5tFVt7ajTrwy2Vf.OlnWFc5S4Lsn4Ye0/";
   };
 
   users.users.sandro-gaming = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" ];
     shell = pkgs.zsh;
     hashedPassword = "$6$nlzgALREFEkm.Ldo$SK7SGTdlawCbe1DelOg8qxvBOXcdFLvU/xqUN/tNgsFtjO/EOmSKK5tFVt7ajTrwy2Vf.OlnWFc5S4Lsn4Ye0/";
   };
@@ -78,6 +78,9 @@
   fonts.fontconfig.enable = true;
   fonts.fontconfig.hinting.enable = false;
 
+  fonts.fonts = with pkgs; [ fira-code ];
+
+  virtualisation.docker.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

@@ -18,6 +18,7 @@ in
       jetbrains-mono
       syncthing
       vscode-fhs
+      docker-compose
     ]) ++ (with master-pkgs; [ discord protonvpn-gui obsidian dropbox ]);
 
     programs.zsh.initExtra = base.programs.zsh.initExtra + ''
