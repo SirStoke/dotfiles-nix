@@ -39,11 +39,11 @@
 
     imports = [ ./modules/homebrew.nix ];
 
-    programs.home-manager.enable = true;
-
     home.packages = base.home.packages ++ (
       with pkgs; [ iterm2 postgresql ]
     );
+    
+    programs.home-manager.enable = true;
 
     # Eventually, fnm will not be needed and everything will be managed by per-project nix flakes
     programs.zsh.initExtra = base.programs.zsh.initExtra + ''
@@ -66,8 +66,10 @@
     };
 
     programs.zsh.shellAliases = {
-      hm-switch = "cd ~/.config/nixpkgs && nix flake update && home-manager switch; cd -";
+      hm-switch = "cd ~/src/dotfiles-nix && nix flake update && home-manager switch --flake .#sandro-darwin; cd -";
     };
+
+    programs.gpg.enable = true;
 
     homebrew = {
       enable = true;
