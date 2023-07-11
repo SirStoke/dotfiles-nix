@@ -24,12 +24,13 @@ in
   home.file.".base16_theme".source = "${base16-shell}/scripts/base16-ocean.sh";
   home.file.".ideavimrc".text = builtins.readFile ./home/.ideavimrc;
 
-  home.packages = [
-    pkgs.fzf
-    pkgs.ripgrep
-    pkgs.jq
-    pkgs.tree
-    pkgs.zoxide
+  home.packages = with pkgs; [
+    fzf
+    ripgrep
+    jq
+    tree
+    zoxide
+    scala-cli
   ];
 
   home.stateVersion = "22.11";
