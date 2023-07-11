@@ -11,7 +11,7 @@
     imports = [ ./modules/homebrew.nix ];
 
     home.packages = base.home.packages ++ (
-      with pkgs; [ iterm2 postgresql jetbrains.gateway ]
+      with pkgs; [ iterm2 postgresql jetbrains.gateway discord ]
     );
     
     programs.home-manager.enable = true;
