@@ -1,5 +1,9 @@
-{ config, pkgs, lib, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   security.wrappers.noisetorch = {
     owner = "sandro";
     group = "users";
