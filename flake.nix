@@ -35,7 +35,11 @@
 
     homeConfigurations.sandro-darwin = 
       let 
-        unsupportedPkgs = import nixpkgs { system = "aarch64-darwin"; config.allowUnsupportedSystem = true; };
+        unsupportedPkgs = import nixpkgs {
+          system = "aarch64-darwin"; 
+          config.allowUnsupportedSystem = true;
+          config.allowUnfree = true;
+        };
       in
         home-manager.lib.homeManagerConfiguration rec {
           pkgs = unsupportedPkgs;
