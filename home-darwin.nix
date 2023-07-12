@@ -18,7 +18,7 @@ in
     home.packages =
       base.home.packages
       ++ (
-        with pkgs; [iterm2 postgresql jetbrains.gateway discord]
+        with pkgs; [iterm2 postgresql jetbrains.gateway discord vscode ]
       );
 
     programs.home-manager.enable = true;
