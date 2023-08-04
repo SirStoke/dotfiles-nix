@@ -42,7 +42,6 @@
 
   services.xserver.desktopManager.plasma5.enable = true;
 
-
   # Packages are mainly installed by home-manager, this is the strict necessary
   environment.systemPackages = with pkgs; [
     vim
