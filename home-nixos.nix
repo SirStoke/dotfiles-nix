@@ -19,6 +19,8 @@ in
       syncthing
       vscode-fhs
       docker-compose
+      obs-studio
+      vlc
     ]) ++ (with master-pkgs; [ discord protonvpn-gui obsidian dropbox ]);
 
     programs.zsh.initExtra = base.programs.zsh.initExtra + ''
