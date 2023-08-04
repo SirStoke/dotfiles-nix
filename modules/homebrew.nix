@@ -1,39 +1,43 @@
 # An home-manager module that manages brew packages, forked from nix-darwin's
 # Originally created by: https://github.com/malob
-{ config, lib, pkgs, ... }:
-
-with lib;
-
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
   cfg = config.homebrew;
 
-  brewfileSection = heading: type: entries: optionalString (entries != [])
-    "# ${heading}\n" + (concatMapStrings (name: "${type} \"${name}\"\n") entries) + "\n";
+  brewfileSection = heading: type: entries:
+    optionalString (entries != [])
+    "# ${heading}\n"
+    + (concatMapStrings (name: "${type} \"${name}\"\n") entries)
+    + "\n";
 
-  masBrewfileSection = entries: optionalString (entries != {}) (
-    "# Mac App Store apps\n" +
-    concatStringsSep "\n" (mapAttrsToList (name: id: ''mas "${name}", id: ${toString id}'') entries) +
-    "\n"
-  );
+  masBrewfileSection = entries:
+    optionalString (entries != {}) (
+      "# Mac App Store apps\n"
+      + concatStringsSep "\n" (mapAttrsToList (name: id: ''mas "${name}", id: ${toString id}'') entries)
+      + "\n"
+    );
 
   brewfile = pkgs.writeText "Brewfile" (
-    brewfileSection "Taps" "tap" cfg.taps +
-    brewfileSection "Brews" "brew" cfg.brews +
-    brewfileSection "Casks" "cask" cfg.casks +
-    masBrewfileSection cfg.masApps +
-    brewfileSection "Docker containers" "whalebrew" cfg.whalebrews +
-    optionalString (cfg.extraConfig != "") ("# Extra config\n" + cfg.extraConfig)
+    brewfileSection "Taps" "tap" cfg.taps
+    + brewfileSection "Brews" "brew" cfg.brews
+    + brewfileSection "Casks" "cask" cfg.casks
+    + masBrewfileSection cfg.masApps
+    + brewfileSection "Docker containers" "whalebrew" cfg.whalebrews
+    + optionalString (cfg.extraConfig != "") ("# Extra config\n" + cfg.extraConfig)
   );
 
   brew-bundle-command = concatStringsSep " " (
-    optional (!cfg.autoUpdate) "HOMEBREW_NO_AUTO_UPDATE=1 $DRY_RUN_CMD" ++
-    [ "brew bundle --file='${brewfile}' --no-lock" ] ++
-    optional (cfg.cleanup == "uninstall" || cfg.cleanup == "zap") "--cleanup" ++
-    optional (cfg.cleanup == "zap") "--zap"
+    optional (!cfg.autoUpdate) "HOMEBREW_NO_AUTO_UPDATE=1 $DRY_RUN_CMD"
+    ++ ["brew bundle --file='${brewfile}' --no-lock"]
+    ++ optional (cfg.cleanup == "uninstall" || cfg.cleanup == "zap") "--cleanup"
+    ++ optional (cfg.cleanup == "zap") "--zap"
   );
-in
-
-{
+in {
   options.homebrew = {
     enable = mkEnableOption ''
       configuring your Brewfile, and installing/updating the formulas therein via
@@ -55,14 +59,17 @@ in
 
     brewPrefix = mkOption {
       type = types.str;
-      default = if pkgs.stdenv.hostPlatform.isAarch64 then "/opt/homebrew/bin" else "/usr/local/bin";
+      default =
+        if pkgs.stdenv.hostPlatform.isAarch64
+        then "/opt/homebrew/bin"
+        else "/usr/local/bin";
       description = ''
         Customize path prefix where executable of <command>brew</command> is searched for.
       '';
     };
 
     cleanup = mkOption {
-      type = types.enum [ "none" "uninstall" "zap" ];
+      type = types.enum ["none" "uninstall" "zap"];
       default = "none";
       example = "uninstall";
       description = ''
@@ -92,21 +99,21 @@ in
     taps = mkOption {
       type = with types; listOf str;
       default = [];
-      example = [ "homebrew/cask-fonts" ];
+      example = ["homebrew/cask-fonts"];
       description = "Homebrew formula repositories to tap.";
     };
 
     brews = mkOption {
       type = with types; listOf str;
       default = [];
-      example = [ "mas" ];
+      example = ["mas"];
       description = "Homebrew brews to install.";
     };
 
     casks = mkOption {
       type = with types; listOf str;
       default = [];
-      example = [ "hammerspoon" "virtualbox" ];
+      example = ["hammerspoon" "virtualbox"];
       description = "Homebrew casks to install.";
     };
 
@@ -136,7 +143,7 @@ in
     whalebrews = mkOption {
       type = with types; listOf str;
       default = [];
-      example = [ "whalebrew/wget" ];
+      example = ["whalebrew/wget"];
       description = ''
         Docker images to install using <command>whalebrew</command>.
 
@@ -174,8 +181,8 @@ in
 
   config = {
     homebrew.brews =
-      optional (cfg.masApps != {}) "mas" ++
-      optional (cfg.whalebrews != []) "whalebrew";
+      optional (cfg.masApps != {}) "mas"
+      ++ optional (cfg.whalebrews != []) "whalebrew";
 
     home.activation.homebrew = mkIf cfg.enable (hm.dag.entryAfter ["writeBoundary"] ''
       # Homebrew Bundle

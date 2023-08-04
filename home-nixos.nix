@@ -1,7 +1,11 @@
-{ config, pkgs, master-pkgs, recursiveUpdate, ... }:
-
-let
-  base = import ./home.nix { inherit config pkgs; };
+{
+  config,
+  pkgs,
+  master-pkgs,
+  recursiveUpdate,
+  ...
+}: let
+  base = import ./home.nix {inherit config pkgs;};
 in
   recursiveUpdate base {
     home.packages = base.home.packages ++ (with pkgs; [ 
@@ -23,9 +27,11 @@ in
       vlc
     ]) ++ (with master-pkgs; [ discord protonvpn-gui obsidian dropbox ]);
 
-    programs.zsh.initExtra = base.programs.zsh.initExtra + ''
-      alias nrs="sudo nixos-rebuild switch --flake '$HOME/src/dotfiles-nix#mjollnir'"
-    '';
+    programs.zsh.initExtra =
+      base.programs.zsh.initExtra
+      + ''
+        alias nrs="sudo nixos-rebuild switch --flake '$HOME/src/dotfiles-nix#mjollnir'"
+      '';
 
     home.file."/home/sandro/.config/terminator/config".text = builtins.readFile ./home/terminator-config;
 
