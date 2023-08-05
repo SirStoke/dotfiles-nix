@@ -32,6 +32,7 @@ in {
     tree
     zoxide
     scala-cli
+    cachix
   ];
 
   home.stateVersion = "22.11";
