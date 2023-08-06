@@ -53,12 +53,6 @@
 
   services.flatpak.enable = true;
 
-  # Must stay on 5.x until 6.2 gets ZFS support because of rtl88x2bu breaking otherwise
-  # Delete the next line and uncomment the boot.kernelPackage entry on zfs.nix once that happens
-  #boot.kernelPackages = pkgs.linuxKernel.packages.linux_5_15;
-
-  boot.extraModulePackages = [config.boot.kernelPackages.rtl88x2bu];
-
   environment.shells = [pkgs.zsh];
 
   programs.steam = {
