@@ -18,7 +18,14 @@ in
     home.packages =
       base.home.packages
       ++ (
-        with pkgs; [iterm2 postgresql jetbrains.gateway discord vscode]
+        with pkgs; [
+          iterm2
+          postgresql
+          jetbrains.gateway
+          jetbrains.idea-ultimate
+          vscode
+          powerline-fonts
+        ]
       );
 
     programs.home-manager.enable = true;
