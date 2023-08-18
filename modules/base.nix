@@ -55,6 +55,8 @@
 
   environment.shells = [pkgs.zsh];
 
+  boot.extraModulePackages = [config.boot.kernelPackages.rtl88x2bu];
+
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
