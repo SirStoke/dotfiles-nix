@@ -41,6 +41,9 @@
   };
 
   services.xserver.desktopManager.plasma5.enable = true;
+  services.xrdp.enable = true;
+  services.xrdp.defaultWindowManager = "startplasma-x11";
+  services.xrdp.openFirewall = true;
 
   # Packages are mainly installed by home-manager, this is the strict necessary
   environment.systemPackages = with pkgs; [
@@ -78,7 +81,7 @@
   fonts.fontconfig.enable = true;
   fonts.fontconfig.hinting.enable = false;
 
-  fonts.fonts = with pkgs; [fira-code];
+  fonts.fonts = with pkgs; [ fira-code nerdfonts ];
 
   virtualisation.docker.enable = true;
 
