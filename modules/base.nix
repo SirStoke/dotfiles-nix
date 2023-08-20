@@ -86,6 +86,8 @@
   virtualisation.docker.enable = true;
 
   nix.settings.trusted-users = ["root" "sandro"];
+  
+  hardware.enableAllFirmware = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
