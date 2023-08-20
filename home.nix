@@ -103,7 +103,7 @@ in {
     ];
 
     extraConfig = ''
-      set-option -sa terminal-overrides ",xterm*:Tc"
+      set-option -sa terminal-overrides ",alacritty:Tc"
       set -g mouse on
 
       # Start windows and panes at 1, not 0
@@ -123,6 +123,9 @@ in {
       bind -n S-Right next-window
 
       set -g @catppuccin_flavour 'mocha'
+
+      # set vi-mode
+      set-window-option -g mode-keys vi
 
       bind-key -T copy-mode-vi v send-keys -X begin-selection
       bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
