@@ -77,7 +77,7 @@ in {
 
   programs.alacritty.settings = {
     font = { 
-      normal = { family = "Source Code Pro for Powerline"; style = "regular"; };
+      normal = { family = "SauceCodePro Nerd Font"; style = "regular"; };
       size = 10;
     };
   };
