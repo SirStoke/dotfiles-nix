@@ -73,6 +73,71 @@ in {
       '';
   };
 
+  programs.alacritty.enable = true;
+
+  programs.alacritty.settings = {
+    font = { 
+      normal = { family = "Source Code Pro for Powerline"; style = "regular"; };
+      size = 10;
+    };
+  };
+
+  programs.tmux = {
+    enable = true;
+    mouse = true;
+
+    plugins = with pkgs.tmuxPlugins; [
+      sensible
+      yank
+
+      (mkTmuxPlugin {
+        pluginName = "catppuccin";
+        version = "0.1";
+        src = pkgs.fetchFromGitHub {
+          owner = "dreamsofcode-io";
+          repo = "catppuccin-tmux";
+          rev = "b4e0715356f820fc72ea8e8baf34f0f60e891718";
+          sha256 = "sha256-FJHM6LJkiAwxaLd5pnAoF3a7AE1ZqHWoCpUJE0ncCA8=";
+        };
+      })
+    ];
+
+    extraConfig = ''
+      set-option -sa terminal-overrides ",xterm*:Tc"
+      set -g mouse on
+
+      # Start windows and panes at 1, not 0
+      set -g base-index 1
+      set -g pane-base-index 1
+      set-window-option -g pane-base-index 1
+      set-option -g renumber-windows on
+
+      # Use Alt-arrow keys without prefix key to switch panes
+      bind -n M-Left select-pane -L
+      bind -n M-Right select-pane -R
+      bind -n M-Up select-pane -U
+      bind -n M-Down select-pane -D
+
+      # Shift arrow to switch windows
+      bind -n S-Left  previous-window
+      bind -n S-Right next-window
+
+      set -g @catppuccin_flavour 'mocha'
+
+      bind-key -T copy-mode-vi v send-keys -X begin-selection
+      bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
+      bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+
+      bind - split-window -v -c "#{pane_current_path}"
+      bind | split-window -h -c "#{pane_current_path}"
+
+      # Free C-l up to clear the screen
+      unbind -n C-l
+    '';
+
+    prefix = "C-space";
+  };
+
   programs.git = {
     enable = true;
     userEmail = "sandro.mosca.dev@gmail.com";
