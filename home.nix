@@ -76,8 +76,11 @@ in {
   programs.alacritty.enable = true;
 
   programs.alacritty.settings = {
-    font = { 
-      normal = { family = "SauceCodePro Nerd Font"; style = "regular"; };
+    font = {
+      normal = {
+        family = "SauceCodePro Nerd Font";
+        style = "regular";
+      };
       size = 10;
     };
   };
