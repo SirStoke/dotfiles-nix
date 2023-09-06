@@ -85,7 +85,6 @@ in {
   programs.kitty.enable = true;
   programs.kitty.font.name = "SauceCodePro Nerd Font";
   programs.kitty.font.size = 10;
-  programs.kitty.shellIntegration.enable = true;
 
   programs.tmux = {
     enable = true;
@@ -157,8 +156,8 @@ in {
     difftastic.enable = true;
     lfs.enable = true;
 
-    extraConfig.url."git@github.com:".insteadOf = https://github.com/;
     extraConfig.url."https://github.com/rust-lang/crates.io-index".insteadOf = https://github.com/rust-lang/crates.io-index;
+    extraConfig.credential."https://github.com".useHttpPath = true;
   };
 
   programs.zsh.oh-my-zsh = {
