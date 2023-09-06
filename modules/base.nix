@@ -81,12 +81,12 @@
   fonts.fontconfig.enable = true;
   fonts.fontconfig.hinting.enable = false;
 
-  fonts.fonts = with pkgs; [ fira-code nerdfonts ];
+  fonts.fonts = with pkgs; [fira-code nerdfonts];
 
   virtualisation.docker.enable = true;
 
   nix.settings.trusted-users = ["root" "sandro"];
-  
+
   hardware.enableAllFirmware = true;
 
   # This value determines the NixOS release from which the default

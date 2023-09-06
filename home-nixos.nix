@@ -26,13 +26,12 @@ in
         lutris
         jetbrains-mono
         syncthing
-        vscode-fhs
         docker-compose
         obs-studio
         vlc
         gh
       ])
-      ++ (with master-pkgs; [discord protonvpn-gui obsidian dropbox]);
+      ++ (with master-pkgs; [discord protonvpn-gui obsidian dropbox vscode-fhs]);
 
     programs.zsh.initExtra =
       base.programs.zsh.initExtra
