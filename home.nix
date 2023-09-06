@@ -73,7 +73,7 @@ in {
       '';
   };
 
-  programs.alacritty.enable = true;
+  programs.alacritty.enable = false;
 
   programs.alacritty.settings = {
     font = { 
@@ -81,6 +81,11 @@ in {
       size = 10;
     };
   };
+
+  programs.kitty.enable = true;
+  programs.kitty.font.name = "SauceCodePro Nerd Font";
+  programs.kitty.font.size = 10;
+  programs.kitty.shellIntegration.enable = true;
 
   programs.tmux = {
     enable = true;
@@ -103,7 +108,7 @@ in {
     ];
 
     extraConfig = ''
-      set-option -sa terminal-overrides ",alacritty:Tc"
+      set-option -sa terminal-overrides ",xterm*:Tc" 
       set -g mouse on
 
       # Start windows and panes at 1, not 0

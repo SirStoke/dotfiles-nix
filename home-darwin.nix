@@ -22,7 +22,8 @@ in
           iterm2
           postgresql
           jetbrains.gateway
-          jetbrains.idea-ultimate
+          jetbrains.idea-community
+          gh
           vscode
           powerline-fonts
         ]
