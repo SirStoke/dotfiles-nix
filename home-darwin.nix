@@ -27,6 +27,8 @@ in
           jetbrains.idea-community
           gh
           powerline-fonts
+          kubectx
+          k9s
         ]
       )
       ++ (with master-pkgs; [vscode]);
