@@ -2,6 +2,7 @@
   config,
   pkgs,
   recursiveUpdate,
+  master-pkgs,
   ...
 }: let
   base = import ./home.nix {inherit config pkgs;};
@@ -21,13 +22,14 @@ in
         with pkgs; [
           iterm2
           postgresql
+          direnv
           jetbrains.gateway
           jetbrains.idea-community
           gh
-          vscode
           powerline-fonts
         ]
-      );
+      )
+      ++ (with master-pkgs; [vscode]);
 
     programs.home-manager.enable = true;
 

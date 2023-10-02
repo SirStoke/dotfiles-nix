@@ -110,7 +110,7 @@ in {
     ];
 
     extraConfig = ''
-      set-option -sa terminal-overrides ",xterm*:Tc" 
+      set-option -sa terminal-overrides ",xterm*:Tc"
       set -g mouse on
 
       # Start windows and panes at 1, not 0

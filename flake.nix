@@ -21,8 +21,10 @@
     rec {
       nixosConfigurations.mjollnir = let
         system = "x86_64-linux";
+
         master-pkgs = import master-nixpkgs {
           inherit system;
+
           config.allowUnfree = true;
         };
       in
@@ -47,9 +49,17 @@
         };
 
       homeConfigurations.sandro-darwin = let
+        system = "aarch64-darwin";
+
         unsupportedPkgs = import nixpkgs {
-          system = "aarch64-darwin";
+          inherit system;
           config.allowUnsupportedSystem = true;
+          config.allowUnfree = true;
+        };
+
+        master-pkgs = import master-nixpkgs {
+          inherit system;
+
           config.allowUnfree = true;
         };
       in
@@ -58,7 +68,11 @@
 
           # Let's pass pkgs.lib.recursiveUpdate as a standalone arg, to avoid a circular dependency when merging
           # configurations
-          extraSpecialArgs = {recursiveUpdate = unsupportedPkgs.lib.recursiveUpdate;};
+          extraSpecialArgs = {
+            inherit master-pkgs;
+
+            recursiveUpdate = unsupportedPkgs.lib.recursiveUpdate;
+          };
 
           modules = [./home-darwin.nix];
         };
