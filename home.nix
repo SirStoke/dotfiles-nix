@@ -26,7 +26,6 @@ in {
   home.file.".ideavimrc".text = builtins.readFile ./home/.ideavimrc;
 
   home.packages = with pkgs; [
-    fzf
     ripgrep
     jq
     tree
@@ -169,4 +168,7 @@ in {
     custom = "$HOME/.zsh-custom";
     theme = "lambda-gitster";
   };
+
+  programs.fzf.enable = true;
+  programs.fzf.enableZshIntegration = true;
 }
