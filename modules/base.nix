@@ -89,7 +89,7 @@
 
   hardware.enableAllFirmware = true;
 
-  networking.firewall.allowedTCPPorts = [ 42000 42001 ];
+  networking.firewall.allowedTCPPorts = [42000 42001];
 
   programs.partition-manager.enable = true;
 
