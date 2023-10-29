@@ -56,4 +56,6 @@ in
 
     fonts.fontconfig.enable = false;
     services.syncthing.enable = true;
+
+    programs.alacritty.enable = true;
   }
