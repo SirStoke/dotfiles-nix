@@ -48,7 +48,7 @@
           ];
         };
 
-      nixosConfigurations.media-server = let
+      nixosConfigurations.daedalus = let
         system = "x86_64-linux";
 
         master-pkgs = import master-nixpkgs {
@@ -62,8 +62,8 @@
 
           specialArgs = attrs;
           modules = [
-            ./media-server/modules
-            ./media-server/services/plex
+            ./daedalus/modules
+            ./daedalus/services/plex
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
