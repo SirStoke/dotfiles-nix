@@ -48,6 +48,34 @@
           ];
         };
 
+      nixosConfigurations.media-server = let
+        system = "x86_64-linux";
+
+        master-pkgs = import master-nixpkgs {
+          inherit system;
+
+          config.allowUnfree = true;
+        };
+      in
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+
+          specialArgs = attrs;
+          modules = [
+            ./modules-media-server
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.sandro = import ./home.nix;
+              home-manager.extraSpecialArgs = {
+                inherit master-pkgs;
+                recursiveUpdate = nixpkgs.lib.recursiveUpdate;
+              };
+            }
+          ];
+        };
+
       homeConfigurations.sandro-darwin = let
         system = "aarch64-darwin";
 
