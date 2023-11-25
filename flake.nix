@@ -62,7 +62,8 @@
 
           specialArgs = attrs;
           modules = [
-            ./modules-media-server
+            ./media-server/modules
+            ./media-server/services/plex
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
