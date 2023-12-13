@@ -23,12 +23,13 @@ in
           iterm2
           postgresql
           direnv
-          jetbrains.gateway
           jetbrains.idea-community
           gh
           powerline-fonts
           kubectx
           k9s
+          rustup
+          cargo-watch
         ]
       )
       ++ (with master-pkgs; [vscode]);
