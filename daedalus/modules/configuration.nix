@@ -7,11 +7,9 @@
     enable = true;
     zfsSupport = true;
     efiSupport = true;
+    efiInstallAsRemovable = true;
     mirroredBoots = [
-      {
-        devices = ["nodev"];
-        path = "/boot";
-      }
+      { devices = [ "nodev"]; path = "/boot"; }
     ];
   };
 
@@ -35,18 +33,16 @@
     fsType = "zfs";
   };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/6426-91A3";
-    fsType = "vfat";
-  };
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/B59A-CA2B";
+      fsType = "vfat";
+    };
 
   services.zfs.autoScrub.enable = true;
 
   networking.hostId = "574b7de7";
 
   swapDevices = [];
-
-  boot.loader.efi.canTouchEfiVariables = true;
 
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
@@ -71,6 +67,9 @@
   services.openssh.permitRootLogin = "yes";
 
   networking.hostName = "daedalus";
+  networking.networkmanager.enable = true;
+
+  boot.extraModulePackages = [];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
