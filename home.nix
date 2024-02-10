@@ -5,7 +5,7 @@
 }: let
   lambda-gitster = pkgs.fetchgit {
     url = "https://github.com/ergenekonyigit/lambda-gitster.git";
-    sparseCheckout = [ "lambda-gitster.zsh-theme" ];
+    sparseCheckout = ["lambda-gitster.zsh-theme"];
     rev = "bc9cb4948920d9cbb72c3b78d18070d1cc94934b";
     sha256 = "sha256-LVfjKimekXz5Rbl4QJEcD4vQUkzrM2DoZ6iuFwCPhOc";
   };
@@ -27,6 +27,7 @@ in {
 
   home.packages = with pkgs; [
     ripgrep
+    devbox
     jq
     tree
     zoxide

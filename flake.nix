@@ -26,6 +26,9 @@
           inherit system;
 
           config.allowUnfree = true;
+          config.permittedInsecurePackages = [
+            "electron-25.9.0"
+          ];
         };
       in
         nixpkgs.lib.nixosSystem {

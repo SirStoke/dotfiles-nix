@@ -12,6 +12,10 @@
   networking.hostName = "mjollnir";
   networking.networkmanager.enable = true;
 
+  networking.networkmanager.extraConfig = ''
+    wifi.wake-on-wlan=magic
+  '';
+
   time.timeZone = "Europe/Rome";
 
   services.plex.enable = true;
@@ -94,13 +98,14 @@
   programs.partition-manager.enable = true;
 
   users.extraGroups.vboxusers.members = ["sandro"];
+
   virtualisation.virtualbox.host.enable = true;
-  virtualisation.virtualbox.host.enableExtensionPack = true;
-  virtualisation.virtualbox.guest.enable = true;
-  virtualisation.virtualbox.guest.x11 = true;
 
   hardware.keyboard.zsa.enable = true;
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-25.9.0"
+  ];
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
