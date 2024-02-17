@@ -30,6 +30,7 @@ in
         obs-studio
         vlc
         gh
+        firefox-bin
       ])
       ++ (with master-pkgs; [discord protonvpn-gui obsidian dropbox vscode-fhs]);
 
