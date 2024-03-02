@@ -26,6 +26,7 @@ in
         lutris
         jetbrains-mono
         jetbrains.idea-community
+        temurin-bin-21
         syncthing
         docker-compose
         obs-studio
