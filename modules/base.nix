@@ -62,7 +62,7 @@
 
   environment.shells = [pkgs.zsh];
 
-  boot.extraModulePackages = [config.boot.kernelPackages.rtl88x2bu];
+  boot.extraModulePackages = [];
 
   programs.steam = {
     enable = true;
@@ -98,8 +98,6 @@
   programs.partition-manager.enable = true;
 
   users.extraGroups.vboxusers.members = ["sandro"];
-
-  virtualisation.virtualbox.host.enable = true;
 
   hardware.keyboard.zsa.enable = true;
 

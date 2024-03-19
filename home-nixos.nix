@@ -23,7 +23,6 @@ in
         signal-desktop
         spotify
         qbittorrent
-        lutris
         jetbrains-mono
         jetbrains.idea-community
         temurin-bin-21
