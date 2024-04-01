@@ -3,6 +3,7 @@
   pkgs,
   master-pkgs,
   recursiveUpdate,
+  nix-alien-pkgs,
   ...
 }: let
   base = import ./home.nix {inherit config pkgs;};
@@ -32,7 +33,8 @@ in
         vlc
         gh
       ])
-      ++ (with master-pkgs; [discord protonvpn-gui obsidian dropbox vscode-fhs]);
+      ++ (with master-pkgs; [discord protonvpn-gui obsidian dropbox vscode-fhs])
+      ++ (with nix-alien-pkgs; [ nix-alien ]);
 
     programs.zsh.initExtra =
       base.programs.zsh.initExtra

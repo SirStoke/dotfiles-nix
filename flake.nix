@@ -10,12 +10,15 @@
 
   inputs.flake-utils.url = "github:numtide/flake-utils";
 
+  inputs.nix-alien.url = "github:thiagokokada/nix-alien/master";
+
   outputs = {
     self,
     nixpkgs,
     master-nixpkgs,
     home-manager,
     flake-utils,
+    nix-alien,
     ...
   } @ attrs:
     rec {
@@ -30,6 +33,7 @@
             "electron-25.9.0"
           ];
         };
+        
       in
         nixpkgs.lib.nixosSystem {
           inherit system;
@@ -45,6 +49,7 @@
               home-manager.users.sandro-gaming = import ./home-nixos.nix;
               home-manager.extraSpecialArgs = {
                 inherit master-pkgs;
+                nix-alien-pkgs = nix-alien.packages.${system};
                 recursiveUpdate = nixpkgs.lib.recursiveUpdate;
               };
             }

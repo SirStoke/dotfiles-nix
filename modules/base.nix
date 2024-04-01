@@ -104,6 +104,8 @@
   users.extraGroups.vboxusers.members = ["sandro"];
 
   hardware.keyboard.zsa.enable = true;
+    
+  programs.nix-ld.enable = true;
 
   nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0"
