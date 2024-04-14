@@ -104,12 +104,19 @@
   users.extraGroups.vboxusers.members = ["sandro"];
 
   hardware.keyboard.zsa.enable = true;
-    
+
   programs.nix-ld.enable = true;
 
   nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0"
   ];
+
+  fileSystems."/home/plex/MediaDisk" = {
+    device = "/dev/nvme1n1p2";
+    fsType = "ntfs-3g";
+    options = ["rw" "uid=193"];
+  };
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave

@@ -9,7 +9,7 @@
     options = ["zfsutil" "X-mount.mkdir"];
   };
 
-  boot.supportedFilesystems = ["zfs"];
+  boot.supportedFilesystems = ["zfs" "ntfs"];
   networking.hostId = "f8b1ea81";
 
   # Uncomment this once zfs support for 6.2 becomes stable
