@@ -33,7 +33,6 @@
             "electron-25.9.0"
           ];
         };
-        
       in
         nixpkgs.lib.nixosSystem {
           inherit system;

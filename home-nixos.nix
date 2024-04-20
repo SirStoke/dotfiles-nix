@@ -32,9 +32,10 @@ in
         obs-studio
         vlc
         gh
+        devbox
       ])
-      ++ (with master-pkgs; [discord protonvpn-gui obsidian dropbox vscode-fhs])
-      ++ (with nix-alien-pkgs; [ nix-alien ]);
+      ++ (with master-pkgs; [discord protonvpn-gui obsidian dropbox vscode-fhs flyctl])
+      ++ (with nix-alien-pkgs; [nix-alien]);
 
     programs.zsh.initExtra =
       base.programs.zsh.initExtra
@@ -131,5 +132,4 @@ in
         margin-left: var(--uc-window-drag-space-pre,0px)
       }
     '';
-
   }

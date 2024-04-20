@@ -9,7 +9,10 @@
     efiSupport = true;
     efiInstallAsRemovable = true;
     mirroredBoots = [
-      { devices = [ "nodev"]; path = "/boot"; }
+      {
+        devices = ["nodev"];
+        path = "/boot";
+      }
     ];
   };
 
@@ -33,10 +36,10 @@
     fsType = "zfs";
   };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/B59A-CA2B";
-      fsType = "vfat";
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/B59A-CA2B";
+    fsType = "vfat";
+  };
 
   services.zfs.autoScrub.enable = true;
 
