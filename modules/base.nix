@@ -117,6 +117,16 @@
     options = ["rw" "uid=193"];
   };
 
+  services.sunshine = {
+    enable = true;
+    openFirewall = true;
+    settings = {
+      capture = "x11";
+      encoder = "amdvce";
+      output_name = 0;
+    };
+  };
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave

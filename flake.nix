@@ -39,6 +39,7 @@
 
           specialArgs = attrs;
           modules = [
+            ./modules/sunshine-module.nix
             ./modules
             home-manager.nixosModules.home-manager
             {
