@@ -10,6 +10,10 @@
   users.users.root.initialHashedPassword = "$6$64JC3IgzLnlXjEm.$Ge4eBdHCioOV4otDyTn7pWYcbgo.r8x2kcktwBFh1L5Z.unObG5KYa4I4tXtOFQo3wca5Gi9CIQaqUMsM8S2M0";
 
   networking.hostName = "mjollnir";
+  networking.nameservers = [
+    "8.8.8.8" "8.8.4.4"
+  ];
+
   networking.networkmanager.enable = true;
 
   networking.networkmanager.extraConfig = ''
@@ -123,7 +127,9 @@
     settings = {
       capture = "x11";
       encoder = "amdvce";
-      output_name = 0;
+      #amd_quality = "quality";
+      #amd_usage = "lowlatency_high_quality";
+      output_name = 1;
     };
   };
 
