@@ -51,6 +51,7 @@ in
     programs.direnv.enable = true;
 
     services.gpg-agent = {
+      pinentryPackage = pkgs.pinentry-qt;
       enable = true;
 
       # cache the keys forever so we don't get asked for a password

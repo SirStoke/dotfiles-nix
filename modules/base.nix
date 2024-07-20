@@ -16,14 +16,16 @@
 
   networking.networkmanager.enable = true;
 
-  networking.networkmanager.extraConfig = ''
-    wifi.wake-on-wlan=magic
-  '';
-
   time.timeZone = "Europe/Rome";
 
   services.plex.enable = true;
   services.plex.openFirewall = true;
+
+  systemd.services.plex.serviceConfig.ProtectHome = pkgs.lib.mkForce false;
+  systemd.services.plex.serviceConfig.ProtectSystem = pkgs.lib.mkForce false;
+
+  services.sonarr.enable = true;
+  services.sonarr.openFirewall = true;
 
   users.mutableUsers = false;
 

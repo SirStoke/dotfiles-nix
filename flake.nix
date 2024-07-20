@@ -1,9 +1,9 @@
 {
-  inputs.nixpkgs.url = github:NixOS/nixpkgs/nixos-23.11;
+  inputs.nixpkgs.url = github:NixOS/nixpkgs/nixos-24.05;
   inputs.master-nixpkgs.url = github:NixOS/nixpkgs/nixos-unstable;
 
   inputs.home-manager = {
-    url = github:nix-community/home-manager/release-23.11;
+    url = github:nix-community/home-manager/release-24.05;
 
     inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -39,7 +39,6 @@
 
           specialArgs = attrs;
           modules = [
-            ./modules/sunshine-module.nix
             ./modules
             home-manager.nixosModules.home-manager
             {
