@@ -107,6 +107,8 @@
           extraSpecialArgs = {
             inherit master-pkgs;
 
+            unfree-pkgs = unsupportedPkgs;
+
             recursiveUpdate = unsupportedPkgs.lib.recursiveUpdate;
           };
 

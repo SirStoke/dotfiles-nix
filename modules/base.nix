@@ -11,7 +11,8 @@
 
   networking.hostName = "mjollnir";
   networking.nameservers = [
-    "8.8.8.8" "8.8.4.4"
+    "8.8.8.8"
+    "8.8.4.4"
   ];
 
   networking.networkmanager.enable = true;

@@ -2,7 +2,7 @@
   config,
   pkgs,
   recursiveUpdate,
-  master-pkgs,
+  unfree-pkgs,
   ...
 }: let
   base = import ./home.nix {inherit config pkgs;};
@@ -32,7 +32,7 @@ in
           cargo-watch
         ]
       )
-      ++ (with master-pkgs; [vscode]);
+      ++ (with unfree-pkgs; [vscode]);
 
     programs.home-manager.enable = true;
 
