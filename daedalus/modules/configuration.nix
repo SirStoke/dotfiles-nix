@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   boot.loader.grub = {
@@ -16,29 +17,27 @@
     ];
   };
 
+  # The key is stored raw in a disk partition, so this is an hack to load the partitions before ZFS initializes
+  boot.zfs.devNodes = lib.mkForce "/dev/disk/by-partuuid";
+
   fileSystems."/" = {
-    device = "zpool/root";
+    device = "root/root";
     fsType = "zfs";
   };
 
   fileSystems."/nix" = {
-    device = "zpool/nix";
+    device = "root/nix";
     fsType = "zfs";
   };
 
   fileSystems."/var" = {
-    device = "zpool/var";
+    device = "root/var";
     fsType = "zfs";
   };
 
   fileSystems."/home" = {
-    device = "zpool/home";
+    device = "root/home";
     fsType = "zfs";
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/B59A-CA2B";
-    fsType = "vfat";
   };
 
   services.zfs.autoScrub.enable = true;

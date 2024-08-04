@@ -12,6 +12,9 @@
 
   inputs.nix-alien.url = "github:thiagokokada/nix-alien/master";
 
+  inputs.disko.url = "github:nix-community/disko";
+  inputs.disko.inputs.nixpkgs.follows = "nixpkgs";
+
   outputs = {
     self,
     nixpkgs,
@@ -19,6 +22,7 @@
     home-manager,
     flake-utils,
     nix-alien,
+    disko,
     ...
   } @ attrs:
     rec {
@@ -69,7 +73,9 @@
 
           specialArgs = attrs;
           modules = [
+            disko.nixosModules.disko
             ./daedalus/modules
+            ./daedalus/disko.nix
             ./daedalus/services/plex
             home-manager.nixosModules.home-manager
             {
