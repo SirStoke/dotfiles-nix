@@ -40,6 +40,11 @@
     fsType = "zfs";
   };
 
+  fileSystems."/var/data" = {
+    device = "data";
+    fsType = "zfs";
+  };
+
   services.zfs.autoScrub.enable = true;
 
   networking.hostId = "574b7de7";

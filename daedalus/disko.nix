@@ -103,6 +103,7 @@
               xattr = "sa";
               recordsize = "1M";
               atime = "off";
+              mountpoint = "legacy";
             };
           };
         };
