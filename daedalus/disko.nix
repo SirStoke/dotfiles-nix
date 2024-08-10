@@ -1,5 +1,4 @@
-{ lib, ... }:
-{
+{lib, ...}: {
   disko.devices = {
     disk = {
       a = {
@@ -93,7 +92,7 @@
         };
 
         options.ashift = "12";
-        
+
         datasets = {
           data = {
             type = "zfs_fs";
@@ -123,7 +122,7 @@
         };
 
         options.ashift = "12";
-        
+
         datasets = {
           root = {
             type = "zfs_fs";
@@ -150,4 +149,3 @@
     };
   };
 }
-

@@ -5,10 +5,10 @@
   ...
 }: {
   virtualisation.oci-containers.containers = {
-   nocodb = {
+    nocodb = {
       image = "nocodb/nocodb:0.252.0";
-      volumes = [ "/var/data/nocodb:/usr/app/data/" ];
-      ports = [ "32271:8080" ];
+      volumes = ["/var/data/nocodb:/usr/app/data/"];
+      ports = ["32271:8080"];
     };
   };
 }

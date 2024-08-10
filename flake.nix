@@ -15,6 +15,8 @@
   inputs.disko.url = "github:nix-community/disko";
   inputs.disko.inputs.nixpkgs.follows = "nixpkgs";
 
+  inputs.agenix.url = "github:ryantm/agenix";
+
   outputs = {
     self,
     nixpkgs,
@@ -23,6 +25,7 @@
     flake-utils,
     nix-alien,
     disko,
+    agenix,
     ...
   } @ attrs:
     rec {
@@ -78,7 +81,9 @@
             ./daedalus/disko.nix
             ./daedalus/services/plex
             ./daedalus/services/nocodb
+            ./daedalus/services/caddy
             home-manager.nixosModules.home-manager
+            agenix.nixosModules.default
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;

@@ -67,7 +67,6 @@
     hashedPassword = "$6$nlzgALREFEkm.Ldo$SK7SGTdlawCbe1DelOg8qxvBOXcdFLvU/xqUN/tNgsFtjO/EOmSKK5tFVt7ajTrwy2Vf.OlnWFc5S4Lsn4Ye0/";
   };
 
-
   virtualisation.containers.enable = true;
   virtualisation.oci-containers.backend = "podman";
 
@@ -86,6 +85,8 @@
 
   networking.hostName = "daedalus";
   networking.networkmanager.enable = true;
+
+  services.tailscale.enable = true;
 
   boot.extraModulePackages = [];
 
