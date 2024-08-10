@@ -77,6 +77,7 @@
             ./daedalus/modules
             ./daedalus/disko.nix
             ./daedalus/services/plex
+            ./daedalus/services/nocodb
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;

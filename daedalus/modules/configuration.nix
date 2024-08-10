@@ -41,7 +41,7 @@
   };
 
   fileSystems."/var/data" = {
-    device = "data";
+    device = "data/data";
     fsType = "zfs";
   };
 
@@ -66,6 +66,17 @@
     shell = pkgs.zsh;
     hashedPassword = "$6$nlzgALREFEkm.Ldo$SK7SGTdlawCbe1DelOg8qxvBOXcdFLvU/xqUN/tNgsFtjO/EOmSKK5tFVt7ajTrwy2Vf.OlnWFc5S4Lsn4Ye0/";
   };
+
+
+  virtualisation.containers.enable = true;
+  virtualisation.oci-containers.backend = "podman";
+
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+  };
+
+  programs.gnupg.agent.enable = true;
 
   security.sudo.wheelNeedsPassword = false;
 
