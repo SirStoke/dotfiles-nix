@@ -136,6 +136,8 @@
     };
   };
 
+  services.tailscale.enable = true;
+
   virtualisation.virtualbox.host.enable = true;
 
   # This value determines the NixOS release from which the default
