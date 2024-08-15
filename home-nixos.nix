@@ -33,6 +33,7 @@ in
         vlc
         gh
         devbox
+        libreoffice-qt
       ])
       ++ (with master-pkgs; [discord protonvpn-gui obsidian dropbox vscode-fhs flyctl])
       ++ (with nix-alien-pkgs; [nix-alien]);
