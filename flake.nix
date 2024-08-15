@@ -80,7 +80,7 @@
             ./daedalus/modules
             ./daedalus/disko.nix
             ./daedalus/services/plex
-            ./daedalus/services/nocodb
+            ./daedalus/services/baserow
             ./daedalus/services/caddy
             home-manager.nixosModules.home-manager
             agenix.nixosModules.default
