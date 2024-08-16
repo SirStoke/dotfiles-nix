@@ -82,6 +82,9 @@
             ./daedalus/services/plex
             ./daedalus/services/baserow
             ./daedalus/services/caddy
+            ./daedalus/services/deluge
+            ./daedalus/services/sonarr
+            ./daedalus/services/jackett
             home-manager.nixosModules.home-manager
             agenix.nixosModules.default
             {

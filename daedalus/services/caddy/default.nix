@@ -56,5 +56,19 @@ in {
 
       import /run/agenix/namecheap-dns
     '';
+
+
+    virtualHosts."deluge.sirstoke.me".extraConfig = ''
+      reverse_proxy localhost:8112
+
+      import /run/agenix/namecheap-dns
+    '';
+
+
+    virtualHosts."sonarr.sirstoke.me".extraConfig = ''
+      reverse_proxy localhost:8989
+
+      import /run/agenix/namecheap-dns
+    '';
   };
 }
