@@ -1,7 +1,7 @@
 {...}:
 {
-  age.secrets.namecheap-dns= {
-    file = ../namecheap-dns.age;
+  age.secrets.cloudflare-dns = {
+    file = ../cloudflare-dns.age;
     owner = "caddy";
     group = "caddy";
   };

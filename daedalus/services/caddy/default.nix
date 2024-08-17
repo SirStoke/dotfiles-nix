@@ -1,10 +1,10 @@
 {pkgs, ...}: let
-  namecheap-caddy = with pkgs; caddy.override {
+  cloudflare-caddy = with pkgs; caddy.override {
     buildGoModule = args:
       buildGoModule (args
         // {
           src = stdenv.mkDerivation rec {
-            pname = "caddy-using-xcaddy-${xcaddy.version}";
+            pname = "caddy-using-xcaddy-${xcaddy.version}-cloudflare";
             inherit (caddy) version;
 
             dontUnpack = true;
@@ -16,8 +16,8 @@
             ];
 
             plugins = [
-              # https://github.com/caddy-dns/namecheap
-              "github.com/caddy-dns/namecheap@7095083a353829fc83632c34e8988fd8eb72f43d"
+              # https://github.com/caddy-dns/cloudflare
+              "github.com/caddy-dns/cloudflare@89f16b99c18ef49c8bb470a82f895bce01cbaece"
             ];
 
             configurePhase = ''
@@ -36,7 +36,7 @@
               cp -r --reflink=auto . $out
             '';
 
-            outputHash = "sha256-7Xa5fS9hbmkhdRso1mSwsEaBRNbW8u7S+L7JuNG/VOA=";
+            outputHash = "sha256-BQZY7NGHDIXKtTqRsm9pOWm8hw26OawGrMlNU5gf7d8";
             outputHashMode = "recursive";
           };
 
@@ -49,38 +49,37 @@ in {
   services.caddy = {
     enable = true;
 
-    package = namecheap-caddy;
+    package = cloudflare-caddy;
 
     virtualHosts."nocodb.sirstoke.me".extraConfig = ''
       reverse_proxy localhost:32271
 
-      import /run/agenix/namecheap-dns
+      import /run/agenix/cloudflare-dns
     '';
-
 
     virtualHosts."deluge.sirstoke.me".extraConfig = ''
       reverse_proxy localhost:8112
 
-      import /run/agenix/namecheap-dns
+      import /run/agenix/cloudflare-dns
     '';
 
 
     virtualHosts."sonarr.sirstoke.me".extraConfig = ''
       reverse_proxy localhost:8989
 
-      import /run/agenix/namecheap-dns
+      import /run/agenix/cloudflare-dns
     '';
 
     virtualHosts."radarr.sirstoke.me".extraConfig = ''
       reverse_proxy localhost:7878
 
-      import /run/agenix/namecheap-dns
+      import /run/agenix/cloudflare-dns
     '';
 
     virtualHosts."bazarr.sirstoke.me".extraConfig = ''
       reverse_proxy localhost:6767
 
-      import /run/agenix/namecheap-dns
+      import /run/agenix/cloudflare-dns
     '';
   };
 }
