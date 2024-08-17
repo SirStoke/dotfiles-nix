@@ -28,8 +28,6 @@ in
           powerline-fonts
           kubectx
           k9s
-          rustup
-          cargo-watch
         ]
       )
       ++ (with unfree-pkgs; [vscode]);
@@ -45,6 +43,8 @@ in
         eval "`fnm env`"
 
         source ~/.zsh_work_env
+	
+	alias vim=nvim
       '';
 
     programs.git =

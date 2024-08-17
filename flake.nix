@@ -1,6 +1,5 @@
 {
   inputs.nixpkgs.url = github:NixOS/nixpkgs/nixos-24.05;
-  inputs.master-nixpkgs.url = github:NixOS/nixpkgs/nixos-unstable;
 
   inputs.home-manager = {
     url = github:nix-community/home-manager/release-24.05;
@@ -20,7 +19,6 @@
   outputs = {
     self,
     nixpkgs,
-    master-nixpkgs,
     home-manager,
     flake-utils,
     nix-alien,
@@ -31,15 +29,6 @@
     rec {
       nixosConfigurations.mjollnir = let
         system = "x86_64-linux";
-
-        master-pkgs = import master-nixpkgs {
-          inherit system;
-
-          config.allowUnfree = true;
-          config.permittedInsecurePackages = [
-            "electron-25.9.0"
-          ];
-        };
       in
         nixpkgs.lib.nixosSystem {
           inherit system;
@@ -54,7 +43,6 @@
               home-manager.users.sandro = import ./home-nixos.nix;
               home-manager.users.sandro-gaming = import ./home-nixos.nix;
               home-manager.extraSpecialArgs = {
-                inherit master-pkgs;
                 nix-alien-pkgs = nix-alien.packages.${system};
                 recursiveUpdate = nixpkgs.lib.recursiveUpdate;
               };
@@ -64,12 +52,6 @@
 
       nixosConfigurations.daedalus = let
         system = "x86_64-linux";
-
-        master-pkgs = import master-nixpkgs {
-          inherit system;
-
-          config.allowUnfree = true;
-        };
       in
         nixpkgs.lib.nixosSystem {
           inherit system;
@@ -92,7 +74,6 @@
               home-manager.useUserPackages = true;
               home-manager.users.sandro = import ./home.nix;
               home-manager.extraSpecialArgs = {
-                inherit master-pkgs;
                 recursiveUpdate = nixpkgs.lib.recursiveUpdate;
               };
             }
@@ -104,12 +85,6 @@
 
         unsupportedPkgs = import nixpkgs {
           inherit system;
-          config.allowUnsupportedSystem = true;
-          config.allowUnfree = true;
-        };
-
-        master-pkgs = import master-nixpkgs {
-          inherit system;
 
           config.allowUnfree = true;
         };
@@ -120,10 +95,7 @@
           # Let's pass pkgs.lib.recursiveUpdate as a standalone arg, to avoid a circular dependency when merging
           # configurations
           extraSpecialArgs = {
-            inherit master-pkgs;
-
             unfree-pkgs = unsupportedPkgs;
-
             recursiveUpdate = unsupportedPkgs.lib.recursiveUpdate;
           };
 
