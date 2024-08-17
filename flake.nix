@@ -66,6 +66,7 @@
             ./daedalus/services/caddy
             ./daedalus/services/deluge
             ./daedalus/services/sonarr
+            ./daedalus/services/radarr
             ./daedalus/services/jackett
             home-manager.nixosModules.home-manager
             agenix.nixosModules.default

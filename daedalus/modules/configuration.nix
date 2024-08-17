@@ -20,6 +20,12 @@
   # The key is stored raw in a disk partition, so this is an hack to load the partitions before ZFS initializes
   boot.zfs.devNodes = lib.mkForce "/dev/disk/by-partuuid";
 
+  fileSystems."/boot" = {
+    device = "/dev/sdd2";
+    fsType = "vfat";
+    options = [ "noatime" "nofail" "umask=0077" ];  # optional, additional options for mounting
+  };
+
   fileSystems."/" = {
     device = "root/root";
     fsType = "zfs";

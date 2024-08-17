@@ -70,5 +70,11 @@ in {
 
       import /run/agenix/namecheap-dns
     '';
+
+    virtualHosts."radarr.sirstoke.me".extraConfig = ''
+      reverse_proxy localhost:7878
+
+      import /run/agenix/namecheap-dns
+    '';
   };
 }
