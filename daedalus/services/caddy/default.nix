@@ -76,5 +76,11 @@ in {
 
       import /run/agenix/namecheap-dns
     '';
+
+    virtualHosts."bazarr.sirstoke.me".extraConfig = ''
+      reverse_proxy localhost:6767
+
+      import /run/agenix/namecheap-dns
+    '';
   };
 }

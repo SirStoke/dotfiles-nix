@@ -61,13 +61,7 @@
             disko.nixosModules.disko
             ./daedalus/modules
             ./daedalus/disko.nix
-            ./daedalus/services/plex
-            ./daedalus/services/baserow
-            ./daedalus/services/caddy
-            ./daedalus/services/deluge
-            ./daedalus/services/sonarr
-            ./daedalus/services/radarr
-            ./daedalus/services/jackett
+            ./daedalus/services
             home-manager.nixosModules.home-manager
             agenix.nixosModules.default
             {
