@@ -12,5 +12,6 @@
     ./radarr
     ./sonarr
     ./bazarr
+    ./toggled
   ];
 }

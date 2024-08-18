@@ -4,4 +4,6 @@ in {
   "namecheap-dns.age".publicKeys = keys;
   "cloudflare-dns.age".publicKeys = keys;
   "duplicity-secrets.age".publicKeys = keys;
+  "toggled-secrets.age".publicKeys = keys;
+  "toggled-docker-pwd.age".publicKeys = keys;
 }

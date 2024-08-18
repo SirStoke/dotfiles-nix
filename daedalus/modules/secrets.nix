@@ -7,7 +7,7 @@
   };
 
 
-  age.secrets.duplicity-secrets = {
-    file = ../duplicity-secrets.age;
-  };
+  age.secrets.duplicity-secrets.file = ../duplicity-secrets.age;
+  age.secrets.toggled-secrets.file = ../toggled-secrets.age;
+  age.secrets.toggled-docker-pwd.file = ../toggled-docker-pwd.age;
 }
