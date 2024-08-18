@@ -8,7 +8,7 @@
     baserow = {
       image = "baserow/baserow:1.26.1";
       volumes = ["/var/data/baserow:/baserow/data"];
-      ports = ["32271:80"];
+      ports = ["127.0.0.1:32271:80"];
       environment = {
         BASEROW_PUBLIC_URL = "https://nocodb.sirstoke.me";
       };
