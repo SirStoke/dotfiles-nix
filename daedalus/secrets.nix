@@ -6,4 +6,5 @@ in {
   "duplicity-secrets.age".publicKeys = keys;
   "toggled-secrets.age".publicKeys = keys;
   "toggled-docker-pwd.age".publicKeys = keys;
+  "wireguard-config.age".publicKeys = keys;
 }
