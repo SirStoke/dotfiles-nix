@@ -1,5 +1,3 @@
-eval "$(zoxide init zsh --cmd cd)"
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 alias gph='git push -u origin HEAD'

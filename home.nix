@@ -30,7 +30,6 @@ in {
     devbox
     jq
     tree
-    zoxide
     scala-cli
     cachix
   ];
@@ -169,6 +168,10 @@ in {
     custom = "$HOME/.zsh-custom";
     theme = "lambda-gitster";
   };
+
+  programs.zoxide.enable = true;
+  programs.zoxide.enableZshIntegration = true;
+  programs.zoxide.options = ["--cmd" "cd"];
 
   programs.fzf.enable = true;
   programs.fzf.enableZshIntegration = true;
