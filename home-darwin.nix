@@ -1,11 +1,12 @@
 {
   config,
   pkgs,
+  unstablePkgs,
   recursiveUpdate,
   unfree-pkgs,
   ...
 }: let
-  base = import ./home.nix {inherit config pkgs;};
+  base = import ./home.nix {inherit config pkgs unstablePkgs;};
 in
   recursiveUpdate base {
     home.homeDirectory = "/users/Sandro";
@@ -22,10 +23,10 @@ in
         with pkgs; [
           iterm2
           postgresql
-          direnv
           jetbrains.idea-community
           gh
           powerline-fonts
+          nerdfonts
           kubectx
           k9s
         ]

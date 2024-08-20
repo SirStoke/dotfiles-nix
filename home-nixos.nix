@@ -2,6 +2,7 @@
   config,
   pkgs,
   master-pkgs,
+  unstablePkgs,
   recursiveUpdate,
   nix-alien-pkgs,
   ...
@@ -42,14 +43,11 @@ in
       base.programs.zsh.initExtra
       + ''
         alias nrs="sudo nixos-rebuild switch --flake '$HOME/src/dotfiles-nix#mjollnir'"
-        eval "$(direnv hook zsh)"
       '';
 
     home.file."/home/sandro/.config/terminator/config".text = builtins.readFile ./home/terminator-config;
 
     programs.gpg.enable = true;
-
-    programs.direnv.enable = true;
 
     services.gpg-agent = {
       pinentryPackage = pkgs.pinentry-qt;

@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  unstablePkgs,
   ...
 }: let
   lambda-gitster = pkgs.fetchgit {
@@ -32,31 +33,15 @@ in {
     tree
     scala-cli
     cachix
+    luajitPackages.luarocks
+    coursier
   ];
 
   home.stateVersion = "22.11";
 
   programs.neovim.enable = true;
   programs.neovim.vimAlias = true;
-
-  programs.neovim.plugins = with pkgs.vimPlugins; [
-    nerdtree
-    base16-vim
-    vim-airline
-    vim-airline-themes
-    ctrlp-vim
-    vim-scala
-    vim-sleuth
-    vim-fugitive
-    tabular
-    vim-javascript
-    vim-jsx-pretty
-    onedark-nvim
-    fzf-vim
-    vim-nix
-  ];
-
-  programs.neovim.extraConfig = builtins.readFile ./home/init.vim;
+  programs.neovim.package = unstablePkgs.neovim-unwrapped;
 
   programs.zsh = {
     enable = true;
@@ -69,6 +54,8 @@ in {
                 eval "$("$BASE16_SHELL/profile_helper.sh")"
 
         export EDITOR=vim
+
+        eval "$(direnv hook zsh)"
       '';
   };
 
@@ -175,4 +162,6 @@ in {
 
   programs.fzf.enable = true;
   programs.fzf.enableZshIntegration = true;
+
+  programs.direnv.enable = true;
 }

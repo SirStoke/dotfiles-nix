@@ -1,5 +1,6 @@
 {
   inputs.nixpkgs.url = github:NixOS/nixpkgs/nixos-24.05;
+  inputs.nixpkgs-unstable.url = github:NixOS/nixpkgs/nixos-unstable;
 
   inputs.home-manager = {
     url = github:nix-community/home-manager/release-24.05;
@@ -19,6 +20,7 @@
   outputs = {
     self,
     nixpkgs,
+    nixpkgs-unstable,
     home-manager,
     flake-utils,
     nix-alien,
@@ -29,6 +31,12 @@
     rec {
       nixosConfigurations.mjollnir = let
         system = "x86_64-linux";
+
+        unstablePkgs = import nixpkgs-unstable {
+          inherit system;
+
+          config.allowUnfree = true;
+        };
       in
         nixpkgs.lib.nixosSystem {
           inherit system;
@@ -45,6 +53,7 @@
               home-manager.extraSpecialArgs = {
                 nix-alien-pkgs = nix-alien.packages.${system};
                 recursiveUpdate = nixpkgs.lib.recursiveUpdate;
+                unstablePkgs = unstablePkgs;
               };
             }
           ];
@@ -83,6 +92,12 @@
 
           config.allowUnfree = true;
         };
+
+        unstablePkgs = import nixpkgs-unstable {
+          inherit system;
+
+          config.allowUnfree = true;
+        };
       in
         home-manager.lib.homeManagerConfiguration rec {
           pkgs = unsupportedPkgs;
@@ -92,6 +107,7 @@
           extraSpecialArgs = {
             unfree-pkgs = unsupportedPkgs;
             recursiveUpdate = unsupportedPkgs.lib.recursiveUpdate;
+            unstablePkgs = unstablePkgs;
           };
 
           modules = [./home-darwin.nix];
