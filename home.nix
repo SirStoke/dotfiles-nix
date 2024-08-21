@@ -26,6 +26,12 @@ in {
   home.file.".base16_theme".source = "${base16-shell}/scripts/base16-ocean.sh";
   home.file.".ideavimrc".text = builtins.readFile ./home/.ideavimrc;
 
+  home.file."nvim" = {
+    source = ./nvim;
+    target = ".config/nvim";
+    recursive = true;
+  };
+
   home.packages = with pkgs; [
     ripgrep
     devbox
