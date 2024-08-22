@@ -55,12 +55,4 @@ vim.opt.scrolloff = 10
 -- Autogroup for stopping Treesitter on Scala files
 local autocmd = vim.api.nvim_create_autocmd
 
-autocmd('FileType', {
-  pattern = 'scala',
-  callback = function()
-    -- Disable Treesitter for Scala files
-    vim.g.nvim_treesitter_disable = true
-  end,
-})
-
 -- vim: ts=2 sts=2 sw=2 et

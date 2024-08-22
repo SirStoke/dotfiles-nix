@@ -40,6 +40,8 @@ in
         dropbox
         vscode-fhs
         flyctl
+        clang
+        stylua
       ])
       ++ (with nix-alien-pkgs; [nix-alien]);
 
