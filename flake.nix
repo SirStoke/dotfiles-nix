@@ -61,6 +61,12 @@
 
       nixosConfigurations.daedalus = let
         system = "x86_64-linux";
+        
+        unstablePkgs = import nixpkgs-unstable {
+          inherit system;
+
+          config.allowUnfree = true;
+        };
       in
         nixpkgs.lib.nixosSystem {
           inherit system;
@@ -78,6 +84,8 @@
               home-manager.useUserPackages = true;
               home-manager.users.sandro = import ./home.nix;
               home-manager.extraSpecialArgs = {
+                inherit unstablePkgs;
+
                 recursiveUpdate = nixpkgs.lib.recursiveUpdate;
               };
             }
