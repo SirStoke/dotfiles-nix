@@ -39,21 +39,21 @@ in
     programs.zsh.initExtra =
       base.programs.zsh.initExtra
       + ''
-        fpath=($HOME/.nix-profile/share/zsh/site-functions $fpath)
+               fpath=($HOME/.nix-profile/share/zsh/site-functions $fpath)
 
-        # Nix
-        if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-          . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-        fi
-        # End Nix
+               # Nix
+               if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+                 . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+               fi
+               # End Nix
 
-        # fnm
-        export PATH=/Users/sandro/.fnm:$PATH
-        eval "`fnm env`"
+               # fnm
+               export PATH=/Users/sandro/.fnm:$PATH
+               eval "`fnm env`"
 
-        source ~/.zsh_work_env
-	
-	alias vim=nvim
+               source ~/.zsh_work_env
+
+        alias vim=nvim
       '';
 
     programs.git =

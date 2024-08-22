@@ -1,50 +1,51 @@
 {pkgs, ...}: let
-  cloudflare-caddy = with pkgs; caddy.override {
-    buildGoModule = args:
-      buildGoModule (args
-        // {
-          src = stdenv.mkDerivation rec {
-            pname = "caddy-using-xcaddy-${xcaddy.version}-cloudflare";
-            inherit (caddy) version;
+  cloudflare-caddy = with pkgs;
+    caddy.override {
+      buildGoModule = args:
+        buildGoModule (args
+          // {
+            src = stdenv.mkDerivation rec {
+              pname = "caddy-using-xcaddy-${xcaddy.version}-cloudflare";
+              inherit (caddy) version;
 
-            dontUnpack = true;
-            dontFixup = true;
+              dontUnpack = true;
+              dontFixup = true;
 
-            nativeBuildInputs = [
-              cacert
-              go
-            ];
+              nativeBuildInputs = [
+                cacert
+                go
+              ];
 
-            plugins = [
-              # https://github.com/caddy-dns/cloudflare
-              "github.com/caddy-dns/cloudflare@89f16b99c18ef49c8bb470a82f895bce01cbaece"
-            ];
+              plugins = [
+                # https://github.com/caddy-dns/cloudflare
+                "github.com/caddy-dns/cloudflare@89f16b99c18ef49c8bb470a82f895bce01cbaece"
+              ];
 
-            configurePhase = ''
-              export GOCACHE=$TMPDIR/go-cache
-              export GOPATH="$TMPDIR/go"
-              export XCADDY_SKIP_BUILD=1
-            '';
+              configurePhase = ''
+                export GOCACHE=$TMPDIR/go-cache
+                export GOPATH="$TMPDIR/go"
+                export XCADDY_SKIP_BUILD=1
+              '';
 
-            buildPhase = ''
-              ${xcaddy}/bin/xcaddy build "${caddy.src.rev}" ${lib.concatMapStringsSep " " (plugin: "--with ${plugin}") plugins}
-              cd buildenv*
-              go mod vendor
-            '';
+              buildPhase = ''
+                ${xcaddy}/bin/xcaddy build "${caddy.src.rev}" ${lib.concatMapStringsSep " " (plugin: "--with ${plugin}") plugins}
+                cd buildenv*
+                go mod vendor
+              '';
 
-            installPhase = ''
-              cp -r --reflink=auto . $out
-            '';
+              installPhase = ''
+                cp -r --reflink=auto . $out
+              '';
 
-            outputHash = "sha256-BQZY7NGHDIXKtTqRsm9pOWm8hw26OawGrMlNU5gf7d8";
-            outputHashMode = "recursive";
-          };
+              outputHash = "sha256-BQZY7NGHDIXKtTqRsm9pOWm8hw26OawGrMlNU5gf7d8";
+              outputHashMode = "recursive";
+            };
 
-          subPackages = ["."];
-          ldflags = ["-s" "-w"]; ## don't include version info twice
-          vendorHash = null;
-        });
-  };
+            subPackages = ["."];
+            ldflags = ["-s" "-w"]; ## don't include version info twice
+            vendorHash = null;
+          });
+    };
 in {
   services.caddy = {
     enable = true;
@@ -62,7 +63,6 @@ in {
 
       import /run/agenix/cloudflare-dns
     '';
-
 
     virtualHosts."sonarr.sirstoke.me".extraConfig = ''
       reverse_proxy localhost:8989

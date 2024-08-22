@@ -23,7 +23,7 @@
   fileSystems."/boot" = {
     device = "/dev/sdd2";
     fsType = "vfat";
-    options = [ "noatime" "nofail" "umask=0077" ];  # optional, additional options for mounting
+    options = ["noatime" "nofail" "umask=0077"]; # optional, additional options for mounting
   };
 
   fileSystems."/" = {
@@ -91,9 +91,8 @@
 
   networking.hostName = "daedalus";
   networking.networkmanager.enable = true;
-  networking.nameservers = [ "1.1.1.1" "8.8.8.8" "8.8.4.4" ];
-  networking.firewall.checkReversePath = false; 
-
+  networking.nameservers = ["1.1.1.1" "8.8.8.8" "8.8.4.4"];
+  networking.firewall.checkReversePath = false;
 
   services.tailscale.enable = true;
 
