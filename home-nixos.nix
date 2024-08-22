@@ -42,6 +42,8 @@ in
         flyctl
         clang
         stylua
+        unzip
+        nodePackages.typescript-language-server
       ])
       ++ (with nix-alien-pkgs; [nix-alien]);
 
