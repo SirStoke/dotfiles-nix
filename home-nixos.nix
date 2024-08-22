@@ -1,13 +1,12 @@
 {
   config,
   pkgs,
-  master-pkgs,
   unstablePkgs,
   recursiveUpdate,
   nix-alien-pkgs,
   ...
 }: let
-  base = import ./home.nix {inherit config pkgs;};
+  base = import ./home.nix {inherit config pkgs unstablePkgs;};
 in
   recursiveUpdate base {
     home.packages =
@@ -35,8 +34,13 @@ in
         gh
         devbox
         libreoffice-qt
+        discord
+        protonvpn-gui
+        obsidian
+        dropbox
+        vscode-fhs
+        flyctl
       ])
-      ++ (with master-pkgs; [discord protonvpn-gui obsidian dropbox vscode-fhs flyctl])
       ++ (with nix-alien-pkgs; [nix-alien]);
 
     programs.zsh.initExtra =
