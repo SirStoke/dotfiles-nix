@@ -61,7 +61,7 @@
 
       nixosConfigurations.daedalus = let
         system = "x86_64-linux";
-        
+
         unstablePkgs = import nixpkgs-unstable {
           inherit system;
 

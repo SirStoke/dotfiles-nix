@@ -13,5 +13,7 @@
     ./sonarr
     ./bazarr
     ./toggled
+    ./clickhouse
+    ./otel-collector
   ];
 }

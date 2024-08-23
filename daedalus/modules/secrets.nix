@@ -9,4 +9,16 @@
   age.secrets.toggled-secrets.file = ../toggled-secrets.age;
   age.secrets.toggled-docker-pwd.file = ../toggled-docker-pwd.age;
   age.secrets.wireguard-config.file = ../wireguard-config.age;
+
+  age.secrets.sonarr-api-key = {
+    file = ../sonarr-api-key.age;
+    owner = "sonarr";
+    group = "media";
+  };
+
+  age.secrets.radarr-api-key = {
+    file = ../radarr-api-key.age;
+    owner = "radarr";
+    group = "media";
+  };
 }
