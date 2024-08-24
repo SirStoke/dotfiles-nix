@@ -1,4 +1,8 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  lib,
+  ...
+}: let
   cloudflare-caddy = with pkgs;
     caddy.override {
       buildGoModule = args:
@@ -46,40 +50,34 @@
             vendorHash = null;
           });
     };
-in {
-  services.caddy = {
-    enable = true;
 
-    package = cloudflare-caddy;
-
-    virtualHosts."nocodb.sirstoke.me".extraConfig = ''
-      reverse_proxy localhost:32271
-
-      import /run/agenix/cloudflare-dns
-    '';
-
-    virtualHosts."deluge.sirstoke.me".extraConfig = ''
-      reverse_proxy localhost:8112
-
-      import /run/agenix/cloudflare-dns
-    '';
-
-    virtualHosts."sonarr.sirstoke.me".extraConfig = ''
-      reverse_proxy localhost:8989
-
-      import /run/agenix/cloudflare-dns
-    '';
-
-    virtualHosts."radarr.sirstoke.me".extraConfig = ''
-      reverse_proxy localhost:7878
-
-      import /run/agenix/cloudflare-dns
-    '';
-
-    virtualHosts."bazarr.sirstoke.me".extraConfig = ''
-      reverse_proxy localhost:6767
+  virtualHost = subdomain: port: {
+    virtualHosts."${subdomain}.sirstoke.me".extraConfig = ''
+      reverse_proxy localhost:${toString port}
 
       import /run/agenix/cloudflare-dns
     '';
   };
+
+  # Deeply merge a list of attrsets with each other
+  recursiveUpdateList = attrsets:
+    with lib;
+      if attrsets == []
+      then {}
+      else lib.recursiveUpdate (head attrsets) (recursiveUpdateList (tail attrsets));
+in {
+  services.caddy =
+    {
+      enable = true;
+
+      package = cloudflare-caddy;
+    }
+    // (recursiveUpdateList [
+      (virtualHost "nocodb" 32271)
+      (virtualHost "deluge" 8112)
+      (virtualHost "sonarr" 8989)
+      (virtualHost "radarr" 7878)
+      (virtualHost "bazarr" 6767)
+      (virtualHost "grafana" 3000)
+    ]);
 }
