@@ -15,5 +15,6 @@
     ./toggled
     ./clickhouse
     ./otel-collector
+    ./grafana
   ];
 }
