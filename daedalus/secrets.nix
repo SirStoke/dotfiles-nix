@@ -6,6 +6,7 @@ in {
   "duplicity-secrets.age".publicKeys = keys;
   "toggled-secrets.age".publicKeys = keys;
   "toggled-docker-pwd.age".publicKeys = keys;
+  "deluge-exporter-secrets.age".publicKeys = keys;
   "wireguard-config.age".publicKeys = keys;
   "sonarr-api-key.age".publicKeys = keys;
   "radarr-api-key.age".publicKeys = keys;

@@ -4,12 +4,12 @@
   lib,
   ...
 }: let
-  exportarr = name: port: {
+  exporter_path = name: port: path: {
     job_name = name;
 
     scrape_interval = "5m";
 
-    metrics_path = "/metrics";
+    metrics_path = path;
     scheme = "http";
 
     static_configs = [
@@ -19,8 +19,7 @@
     ];
   };
 
-  sonarr = exportarr "sonarr" 9708;
-  radarr = exportarr "radarr" 9709;
+  exporter = name: port: exporter_path name port "/metrics";
 
   otel-contrib = let
     version = "0.107.0";
@@ -47,7 +46,12 @@ in {
     package = otel-contrib;
 
     settings = {
-      receivers.prometheus.config.scrape_configs = [sonarr radarr];
+      receivers.prometheus.config.scrape_configs = [
+        (exporter "sonarr" 9708)
+        (exporter "radarr" 9709)
+        (exporter "systemd" 9558)
+        (exporter "zfs" 9134)
+      ];
 
       exporters.clickhouse = {
         endpoint = "tcp://127.0.0.1:19000";

@@ -16,5 +16,6 @@
     ./clickhouse
     ./otel-collector
     ./grafana
+    ./prometheus-exporters
   ];
 }
