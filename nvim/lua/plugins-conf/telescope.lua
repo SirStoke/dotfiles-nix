@@ -62,6 +62,10 @@ return {
         --   },
         -- },
         -- pickers = {}
+        defaults = {
+          path_display = { shorten = { len = 1, exclude = { -3, -2, -1 } } },
+          dynamic_preview_title = true,
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
@@ -85,6 +89,9 @@ return {
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.find_files, { desc = '[ ] Find files ' })
+
+      local extensions = require('telescope').extensions
+      vim.keymap.set('n', '<leader>sm', extensions.metals.commands, { desc = '[S]earch [M]etals commands' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()

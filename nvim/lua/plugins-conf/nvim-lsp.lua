@@ -56,13 +56,19 @@ return {
           vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
         end
 
+        local vmap = function(keys, func, desc)
+          vim.keymap.set('v', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+        end
+
         -- Jump to the definition of the word under your cursor.
         --  This is where a variable was first declared, or where a function is defined, etc.
         --  To jump back, press <C-t>.
         map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
 
         -- Find references for the word under your cursor.
-        map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+        map('gr', function()
+          require('telescope.builtin').lsp_references { fname_width = 80 }
+        end, '[G]oto [R]eferences')
 
         -- Jump to the implementation of the word under your cursor.
         --  Useful when your language has ways of declaring types without an actual implementation.
@@ -85,9 +91,12 @@ return {
         --  Most Language Servers support renaming across files, etc.
         map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
 
-        -- Rename the variable under your cursor.
-        --  Most Language Servers support renaming across files, etc.
+        -- Shows type
         map('<S-M-p>', vim.lsp.buf.hover, 'Show type')
+        vmap('<S-M-p>', vim.lsp.buf.hover, 'Show type')
+
+        -- Parameter hints (aka signature help)
+        map('<M-p>', vim.lsp.buf.signature_help, '[C]ode [A]ction')
 
         -- Execute a code action, usually your cursor needs to be on top of an error
         -- or a suggestion from your LSP for this to activate.
