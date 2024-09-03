@@ -21,7 +21,7 @@
   boot.zfs.devNodes = lib.mkForce "/dev/disk/by-partuuid";
 
   fileSystems."/boot" = {
-    device = "/dev/sdd2";
+    device = "/dev/sde2";
     fsType = "vfat";
     options = ["noatime" "nofail" "umask=0077"]; # optional, additional options for mounting
   };
@@ -94,7 +94,9 @@
   networking.hostName = "daedalus";
   networking.networkmanager.enable = true;
   networking.nameservers = ["1.1.1.1" "8.8.8.8" "8.8.4.4"];
+
   networking.firewall.checkReversePath = false;
+  networking.firewall.trustedInterfaces = ["podman0"];
 
   services.tailscale.enable = true;
 
