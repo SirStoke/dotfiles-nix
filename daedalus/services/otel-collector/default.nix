@@ -51,6 +51,7 @@ in {
         (exporter "radarr" 9709)
         (exporter "systemd" 9558)
         (exporter "zfs" 9134)
+        (exporter "deluge" 9354)
       ];
 
       exporters.clickhouse = {
