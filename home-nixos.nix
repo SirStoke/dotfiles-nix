@@ -44,6 +44,7 @@ in
         stylua
         unzip
         nodePackages.typescript-language-server
+        steamtinkerlaunch
       ])
       ++ (with nix-alien-pkgs; [nix-alien]);
 
