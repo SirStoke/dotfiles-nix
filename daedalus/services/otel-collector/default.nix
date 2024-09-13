@@ -46,12 +46,19 @@ in {
     package = otel-contrib;
 
     settings = {
-      receivers.prometheus.config.scrape_configs = [
-        (exporter "sonarr" 9708)
-        (exporter "radarr" 9709)
-        (exporter "systemd" 9558)
-        (exporter "zfs" 9134)
-      ];
+      receivers = {
+        prometheus.config.scrape_configs = [
+          (exporter "sonarr" 9708)
+          (exporter "radarr" 9709)
+          (exporter "systemd" 9558)
+          (exporter "zfs" 9134)
+          (exporter "deluge" 9354)
+        ];
+
+        otlp.protocols = {
+          http.endpoint = "127.0.0.1:4318";
+        };
+      };
 
       exporters.clickhouse = {
         endpoint = "tcp://127.0.0.1:19000";
@@ -61,7 +68,7 @@ in {
       };
 
       service.pipelines.metrics = {
-        receivers = ["prometheus"];
+        receivers = ["prometheus" "otlp"];
         exporters = ["clickhouse"];
       };
     };
