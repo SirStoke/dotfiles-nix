@@ -79,5 +79,6 @@ in {
       (virtualHost "radarr" 7878)
       (virtualHost "bazarr" 6767)
       (virtualHost "grafana" 3000)
+      (virtualHost "mealie" 9000)
     ]);
 }

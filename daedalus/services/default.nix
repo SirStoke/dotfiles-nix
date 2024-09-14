@@ -17,5 +17,6 @@
     ./otel-collector
     ./grafana
     ./prometheus-exporters
+    ./mealie
   ];
 }

@@ -21,7 +21,7 @@
   boot.zfs.devNodes = lib.mkForce "/dev/disk/by-partuuid";
 
   fileSystems."/boot" = {
-    device = "/dev/sde2";
+    device = "/dev/disk/by-id/ata-Samsung_Portable_SSD_T5_S46VNP0MC07645W-part2";
     fsType = "vfat";
     options = ["noatime" "nofail" "umask=0077"]; # optional, additional options for mounting
   };
