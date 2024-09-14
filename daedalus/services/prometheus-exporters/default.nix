@@ -13,4 +13,14 @@
       ];
     };
   };
+
+  users.users.systemd-exporter = {
+    isSystemUser = true;
+    group = "systemd-exporter";
+  };
+
+  users.groups.systemd-exporter = {};
+
+  # Can't read from dbus-daemon otherwise
+  systemd.services."prometheus-systemd-exporter".serviceConfig.DynamicUser = false;
 }
