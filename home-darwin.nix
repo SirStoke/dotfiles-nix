@@ -31,7 +31,7 @@ in
           k9s
         ]
       )
-      ++ (with unfree-pkgs; [vscode code-cursor]);
+      ++ (with unfree-pkgs; [vscode]);
 
     programs.home-manager.enable = true;
 

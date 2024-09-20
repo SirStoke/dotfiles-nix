@@ -64,6 +64,7 @@ require('lazy').setup({
       -- Document existing key chains
       require('which-key').add {
         { '<leader>c', group = '[C]ode' },
+        { '<leader>a', group = '[A]I' },
         { '<leader>d', group = '[D]ocument' },
         { '<leader>r', group = '[R]ename' },
         { '<leader>s', group = '[S]earch' },
@@ -88,6 +89,59 @@ require('lazy').setup({
   require 'plugins-conf.neo-tree',
   require 'plugins-conf.lualine',
   require 'plugins-conf.notify',
+
+  -- Copilot
+  {
+    'zbirenbaum/copilot.lua',
+    config = function()
+      require('copilot').setup {
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+      }
+    end,
+  },
+  {
+    'zbirenbaum/copilot-cmp',
+    config = function()
+      require('copilot_cmp').setup()
+    end,
+  },
+  {
+    {
+      'CopilotC-Nvim/CopilotChat.nvim',
+      branch = 'canary',
+      dependencies = {
+        { 'zbirenbaum/copilot.lua' }, -- or github/copilot.vim
+        { 'nvim-lua/plenary.nvim' }, -- for curl, log wrapper
+      },
+      build = 'make tiktoken', -- Only on MacOS or Linux
+      opts = {},
+      config = function(_, opts)
+        local vmap = function(keys, func, desc)
+          vim.keymap.set('v', keys, func, { desc = 'AI Copilot: ' .. desc })
+        end
+
+        local chat = require 'CopilotChat'
+        local select = require 'CopilotChat.select'
+
+        vim.api.nvim_create_user_command('CopilotChatInline', function(args)
+          chat.ask(args.args or '', {
+            selection = select.visual,
+            window = {
+              layout = 'float',
+              relative = 'cursor',
+              width = 1,
+              height = 0.4,
+              row = 1,
+            },
+          })
+        end, { nargs = '*', range = true })
+
+        vmap('<leader>ac', ':CopilotChatInline<cr>', '[A]I inline [C]hat')
+      end,
+      -- See Commands section for default commands if you want to lazy load on them
+    },
+  },
 
   -- LSP Plugins
   {
