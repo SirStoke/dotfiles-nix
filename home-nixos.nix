@@ -46,6 +46,7 @@ in
         nodePackages.typescript-language-server
         steamtinkerlaunch
       ])
+      ++ (with unstablePkgs; [code-cursor])
       ++ (with nix-alien-pkgs; [nix-alien]);
 
     programs.zsh.initExtra =
