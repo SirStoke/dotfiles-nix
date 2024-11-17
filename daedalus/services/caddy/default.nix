@@ -59,6 +59,21 @@
     '';
   };
 
+  serveStatic = subdomain: {
+    virtualHosts."${subdomain}.sirstoke.me".extraConfig = ''
+      handle_path /* {
+        root * /var/data/static
+        file_server {
+            root /var/data/static
+            browse
+        }
+      }
+
+      encode gzip
+      import /run/agenix/cloudflare-dns
+    '';
+  };
+
   # Deeply merge a list of attrsets with each other
   recursiveUpdateList = attrsets:
     with lib;
@@ -70,6 +85,8 @@ in {
     {
       enable = true;
 
+      logFormat = "level DEBUG";
+
       package = cloudflare-caddy;
     }
     // (recursiveUpdateList [
@@ -80,5 +97,8 @@ in {
       (virtualHost "bazarr" 6767)
       (virtualHost "grafana" 3000)
       (virtualHost "mealie" 9000)
+      (serveStatic "static")
     ]);
+
+  systemd.services.caddy.serviceConfig.SupplementaryGroups = "media";
 }
