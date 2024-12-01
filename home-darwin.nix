@@ -13,6 +13,11 @@ in
     home.username = "sandro";
     home.stateVersion = "22.11";
 
+    home.file."/users/Sandro/Library/Preferences/clangd/config.yaml".text = ''
+      CompileFlags:
+        Add: [-I/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1]
+    '';
+
     xdg.enable = false;
 
     imports = [./modules/homebrew.nix];

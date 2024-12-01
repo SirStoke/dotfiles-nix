@@ -164,7 +164,9 @@ return {
     --  - settings (table): Override the default settings passed when initializing the server.
     --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
     local servers = {
-      clangd = {},
+      clangd = {
+        cmd = { 'clangd', '--query-driver=/usr/bin/clang++' },
+      },
       -- gopls = {},
       -- pyright = {},
       rust_analyzer = {},
@@ -207,6 +209,7 @@ return {
     vim.list_extend(ensure_installed, {
       'stylua', -- Used to format Lua code
     })
+
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
     require('mason-lspconfig').setup {
