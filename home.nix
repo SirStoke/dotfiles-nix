@@ -77,10 +77,6 @@ in {
     };
   };
 
-  programs.kitty.enable = true;
-  programs.kitty.font.name = "SauceCodePro Nerd Font";
-  programs.kitty.font.size = 10;
-
   programs.tmux = {
     enable = true;
     mouse = true;

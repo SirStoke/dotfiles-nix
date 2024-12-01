@@ -69,7 +69,6 @@
 
   boot.zfs.forceImportAll = true;
 
-
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   hardware.bluetooth = {
     enable = true;

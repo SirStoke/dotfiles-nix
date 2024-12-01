@@ -68,6 +68,10 @@ in
       maxCacheTtl = 31536000;
     };
 
+    programs.kitty.enable = true;
+    programs.kitty.font.name = "SauceCodePro Nerd Font";
+    programs.kitty.font.size = 10;
+
     fonts.fontconfig.enable = false;
     services.syncthing.enable = true;
 

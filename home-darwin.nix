@@ -29,6 +29,7 @@ in
           nerdfonts
           kubectx
           k9s
+          dbeaver-bin
         ]
       )
       ++ (with unfree-pkgs; [vscode]);

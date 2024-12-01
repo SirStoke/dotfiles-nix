@@ -71,7 +71,7 @@
         nixpkgs.lib.nixosSystem {
           inherit system;
 
-          specialArgs = attrs // { inherit unstablePkgs; };
+          specialArgs = attrs // {inherit unstablePkgs;};
           modules = [
             disko.nixosModules.disko
             ./daedalus/modules
@@ -100,7 +100,7 @@
 
           config.allowUnfree = true;
         };
- 
+
         unstablePkgs = import nixpkgs-unstable {
           inherit system;
 
