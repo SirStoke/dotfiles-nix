@@ -14,6 +14,13 @@ return {
     -- Allows extra capabilities provided by nvim-cmp
     'hrsh7th/cmp-nvim-lsp',
   },
+  opts = {
+    servers = {
+      clangd = {
+        mason = false,
+      },
+    },
+  },
   config = function()
     -- Brief aside: **What is LSP?**
     --
@@ -164,9 +171,9 @@ return {
     --  - settings (table): Override the default settings passed when initializing the server.
     --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
     local servers = {
-      clangd = {
-        cmd = { 'clangd', '--query-driver=/usr/bin/clang++' },
-      },
+      --      clangd = {
+      --        cmd = { 'clangd', '--query-driver=/usr/bin/clang++' },
+      --      },
       -- gopls = {},
       -- pyright = {},
       rust_analyzer = {},
@@ -224,5 +231,7 @@ return {
         end,
       },
     }
+
+    require('lspconfig').clangd.setup {}
   end,
 }

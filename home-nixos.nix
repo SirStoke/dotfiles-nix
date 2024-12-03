@@ -23,7 +23,6 @@ in
         powerline-fonts
         signal-desktop
         spotify
-        qbittorrent
         jetbrains-mono
         jetbrains.idea-community
         temurin-bin-21
@@ -46,7 +45,7 @@ in
         nodePackages.typescript-language-server
         steamtinkerlaunch
       ])
-      ++ (with unstablePkgs; [code-cursor])
+      ++ (with unstablePkgs; [code-cursor qbittorrent])
       ++ (with nix-alien-pkgs; [nix-alien]);
 
     programs.zsh.initExtra =
