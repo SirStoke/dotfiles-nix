@@ -25,9 +25,6 @@
   systemd.services.plex.serviceConfig.ProtectHome = pkgs.lib.mkForce false;
   systemd.services.plex.serviceConfig.ProtectSystem = pkgs.lib.mkForce false;
 
-  services.sonarr.enable = true;
-  services.sonarr.openFirewall = true;
-
   users.mutableUsers = false;
 
   users.users.sandro = {
