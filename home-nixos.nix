@@ -44,6 +44,7 @@ in
         unzip
         nodePackages.typescript-language-server
         steamtinkerlaunch
+        zoom-us
       ])
       ++ (with unstablePkgs; [code-cursor qbittorrent])
       ++ (with nix-alien-pkgs; [nix-alien]);
