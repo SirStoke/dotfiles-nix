@@ -52,7 +52,7 @@
 
   hardware.opengl.enable = true;
 
-  hardware.opengl.extraPackages = [ pkgs.rocmPackages.clr ];
+  hardware.opengl.extraPackages = [pkgs.rocmPackages.clr];
 
   hardware.amdgpu.opencl.enable = true;
 
