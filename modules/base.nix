@@ -52,7 +52,7 @@
 
   hardware.opengl.enable = true;
 
-  hardware.opengl.extraPackages = [ pkgs.rocmPackages.clr ];
+  hardware.opengl.extraPackages = [pkgs.rocmPackages.clr];
 
   hardware.amdgpu.opencl.enable = true;
 
@@ -118,12 +118,6 @@
   nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0"
   ];
-
-  fileSystems."/home/plex/MediaDisk" = {
-    device = "/dev/nvme1n1p2";
-    fsType = "ntfs-3g";
-    options = ["rw" "uid=193"];
-  };
 
   services.sunshine = {
     enable = true;
