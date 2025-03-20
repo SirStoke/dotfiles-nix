@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   nixpkgs.config.allowUnfree = true;
@@ -14,6 +15,9 @@
     "8.8.8.8"
     "8.8.4.4"
   ];
+
+  # The key is stored raw in a disk partition, so this is an hack to load the partitions before ZFS initializes
+  boot.zfs.devNodes = lib.mkForce "/dev/disk/by-partuuid";
 
   networking.networkmanager.enable = true;
 
