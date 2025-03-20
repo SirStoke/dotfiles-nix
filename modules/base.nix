@@ -61,6 +61,12 @@
   hardware.amdgpu.opencl.enable = true;
 
   services.xserver.desktopManager.plasma5.enable = true;
+
+  services.displayManager.sddm.autoLogin = {
+    user = "sandro";
+    enable = true;
+  };
+
   services.xrdp.enable = true;
   services.xrdp.defaultWindowManager = "startplasma-x11";
   services.xrdp.openFirewall = true;
