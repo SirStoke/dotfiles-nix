@@ -89,6 +89,19 @@
                 recursiveUpdate = nixpkgs.lib.recursiveUpdate;
               };
             }
+            {
+              nixpkgs.config.permittedInsecurePackages = [
+                # Sonarr dependencies
+                "dotnet-sdk-6.0.428"
+                "aspnetcore-runtime-6.0.36"
+              ];
+
+              nixpkgs.overlays = [
+                (final: prev: {
+                  jackett = prev.jackett.overrideAttrs {doCheck = false;};
+                })
+              ];
+            }
           ];
         };
 
