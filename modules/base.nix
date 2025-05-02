@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   nixpkgs.config.allowUnfree = true;
@@ -14,6 +15,9 @@
     "8.8.8.8"
     "8.8.4.4"
   ];
+
+  # The key is stored raw in a disk partition, so this is an hack to load the partitions before ZFS initializes
+  boot.zfs.devNodes = lib.mkForce "/dev/disk/by-partuuid";
 
   networking.networkmanager.enable = true;
 
@@ -57,6 +61,12 @@
   hardware.amdgpu.opencl.enable = true;
 
   services.xserver.desktopManager.plasma5.enable = true;
+
+  services.displayManager.sddm.autoLogin = {
+    user = "sandro";
+    enable = true;
+  };
+
   services.xrdp.enable = true;
   services.xrdp.defaultWindowManager = "startplasma-x11";
   services.xrdp.openFirewall = true;
@@ -118,12 +128,6 @@
   nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0"
   ];
-
-  fileSystems."/home/plex/MediaDisk" = {
-    device = "/dev/nvme1n1p2";
-    fsType = "ntfs-3g";
-    options = ["rw" "uid=193"];
-  };
 
   services.sunshine = {
     enable = true;
