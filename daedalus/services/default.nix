@@ -9,6 +9,7 @@
     ./deluge
     ./jackett
     ./plex
+    ./jellyfin
     ./radarr
     ./sonarr
     ./bazarr
