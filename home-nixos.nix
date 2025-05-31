@@ -147,7 +147,7 @@ in
         margin-left: var(--uc-window-drag-space-pre,0px)
       }
     '';
-    
+
     xdg.desktopEntries = {
       cursor = {
         name = "Cursor";
@@ -155,7 +155,7 @@ in
         comment = "AI-first code editor";
         exec = "/bin/sh -c \"appimage-run \\\\$HOME/Downloads/Cursor.AppImage\"";
         icon = "${pkgs.vscode}/share/pixmaps/code.png"; # Using VSCode icon as a placeholder
-        categories = [ "Development" "IDE" "TextEditor" ];
+        categories = ["Development" "IDE" "TextEditor"];
         terminal = false;
         type = "Application";
       };

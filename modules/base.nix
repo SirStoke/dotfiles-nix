@@ -3,7 +3,9 @@
   pkgs,
   lib,
   ...
-}: {
+}: let
+  allNerdFonts = builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+in {
   nixpkgs.config.allowUnfree = true;
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
@@ -107,7 +109,7 @@
   fonts.fontconfig.enable = true;
   fonts.fontconfig.hinting.enable = false;
 
-  fonts.fonts = with pkgs; [fira-code nerdfonts];
+  fonts.fonts = with pkgs; [fira-code] ++ allNerdFonts;
 
   virtualisation.docker.enable = true;
 

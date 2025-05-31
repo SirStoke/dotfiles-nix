@@ -48,9 +48,11 @@ in {
   programs.neovim.enable = true;
   programs.neovim.vimAlias = true;
   programs.neovim.package = unstablePkgs.neovim-unwrapped.overrideAttrs (old: {
-    meta = old.meta or { } // {
-      maintainers = [ ];
-    };
+    meta =
+      old.meta or {}
+      // {
+        maintainers = [];
+      };
   });
 
   programs.zsh = {
