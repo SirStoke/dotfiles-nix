@@ -25,6 +25,7 @@ in
         spotify
         jetbrains-mono
         jetbrains.idea-community
+        android-studio
         temurin-bin-21
         syncthing
         docker-compose
