@@ -7,10 +7,11 @@
   ...
 }: let
   base = import ./home.nix {inherit config pkgs unstablePkgs;};
+  lib = pkgs.lib;
 in
   recursiveUpdate base {
-    home.homeDirectory = "/users/Sandro";
-    home.username = "sandro";
+    home.homeDirectory = "/users/sandro.mosca";
+    home.username = "sandro.mosca";
     home.stateVersion = "22.11";
 
     home.file."/users/Sandro/Library/Preferences/clangd/config.yaml".text = ''
@@ -31,13 +32,13 @@ in
           jetbrains.idea-community
           gh
           powerline-fonts
-          nerdfonts
           kubectx
           k9s
           dbeaver-bin
         ]
       )
-      ++ (with unfree-pkgs; [vscode]);
+      ++ (with unfree-pkgs; [vscode])
+      ++ (builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts));
 
     programs.home-manager.enable = true;
 
@@ -85,16 +86,13 @@ in
       brews = [
         "bitwarden-cli"
         "git-machete"
-        "vault"
         "fnm"
         "brotli"
-        "aria2"
       ];
 
       casks = [
         "amethyst"
-        "eloston-chromium"
-        "wkhtmltopdf"
+        "ghostty"
       ];
     };
   }

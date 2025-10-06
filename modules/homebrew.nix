@@ -33,7 +33,7 @@ with lib; let
 
   brew-bundle-command = concatStringsSep " " (
     optional (!cfg.autoUpdate) "HOMEBREW_NO_AUTO_UPDATE=1 $DRY_RUN_CMD"
-    ++ ["brew bundle --file='${brewfile}' --no-lock"]
+    ++ ["brew bundle --file='${brewfile}'"]
     ++ optional (cfg.cleanup == "uninstall" || cfg.cleanup == "zap") "--cleanup"
     ++ optional (cfg.cleanup == "zap") "--zap"
   );
