@@ -138,6 +138,9 @@ in {
 
       # Free C-l up to clear the screen
       unbind -n C-l
+
+      set -gu default-command
+      set -g default-shell "$SHELL"
     '';
 
     prefix = "C-space";
