@@ -46,9 +46,10 @@ in
         nodePackages.typescript-language-server
         steamtinkerlaunch
         zoom-us
+        pkgsi686Linux.vulkan-tools
         appimage-run
       ])
-      ++ (with unstablePkgs; [qbittorrent])
+      ++ (with unstablePkgs; [qbittorrent ghostty])
       ++ (with nix-alien-pkgs; [nix-alien]);
 
     programs.zsh.initExtra =
