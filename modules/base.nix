@@ -147,6 +147,10 @@ in {
 
   programs.firejail.enable = true;
 
+  boot.kernelParams = [ "amdgpu.dcdebugmask=0x10" ];
+
+  xdg.portal.enable = true;
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
