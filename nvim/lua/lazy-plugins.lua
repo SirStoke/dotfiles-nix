@@ -89,24 +89,6 @@ require('lazy').setup({
   require 'plugins-conf.neo-tree',
   require 'plugins-conf.lualine',
   require 'plugins-conf.notify',
-  require 'plugins-conf.copilot',
-
-  -- Copilot
-  {
-    'zbirenbaum/copilot.lua',
-    config = function()
-      require('copilot').setup {
-        suggestion = { enabled = false },
-        panel = { enabled = false },
-      }
-    end,
-  },
-  {
-    'zbirenbaum/copilot-cmp',
-    config = function()
-      require('copilot_cmp').setup()
-    end,
-  },
 
   -- LSP Plugins
   {

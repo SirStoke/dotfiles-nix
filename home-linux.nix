@@ -32,6 +32,10 @@ in
 
     home.file."/home/sandro/.config/terminator/config".text = builtins.readFile ./home/terminator-config;
 
+    home.shellAliases = {
+      hm-switch = "cd $HOME/src/dotfiles-nix && nix run home-manager/release-25.05 -- switch --flake .#sandro-linux && cd -";
+    };
+
     programs.gpg.enable = true;
 
     services.gpg-agent = {
