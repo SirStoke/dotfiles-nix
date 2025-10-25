@@ -133,6 +133,35 @@
 
           modules = [./home-darwin.nix];
         };
+      
+     homeConfigurations.sandro-linux = let
+        system = "aarch64-linux";
+
+        unsupportedPkgs = import nixpkgs {
+          inherit system;
+
+          config.allowUnfree = true;
+        };
+
+        unstablePkgs = import nixpkgs-unstable {
+          inherit system;
+
+          config.allowUnfree = true;
+        };
+      in
+        home-manager.lib.homeManagerConfiguration rec {
+          pkgs = unsupportedPkgs;
+
+          # Let's pass pkgs.lib.recursiveUpdate as a standalone arg, to avoid a circular dependency when merging
+          # configurations
+          extraSpecialArgs = {
+            unfree-pkgs = unsupportedPkgs;
+            recursiveUpdate = unsupportedPkgs.lib.recursiveUpdate;
+            unstablePkgs = unstablePkgs;
+          };
+
+          modules = [./home-linux.nix];
+        };
     }
     // flake-utils.lib.eachDefaultSystem (
       system: let
