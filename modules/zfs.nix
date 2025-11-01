@@ -12,9 +12,6 @@
   boot.supportedFilesystems = ["zfs" "ntfs"];
   networking.hostId = "f8b1ea81";
 
-  # Uncomment this once zfs support for 6.2 becomes stable
-  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
-
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.loader.efi.canTouchEfiVariables = false;
 
