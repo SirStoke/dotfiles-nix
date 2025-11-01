@@ -75,7 +75,7 @@ in {
 
   # Packages are mainly installed by home-manager, this is the strict necessary
   environment.systemPackages = with pkgs; [
-    vim
+    vim btrfs-progs
   ];
 
   services.openssh.enable = true;
@@ -150,6 +150,12 @@ in {
   boot.kernelParams = [ "amdgpu.dcdebugmask=0x10" ];
 
   xdg.portal.enable = true;
+
+  fileSystems."/home/sandro/GamesDrive" = {
+    device = "/dev/nvme1n1p2";
+    fsType = "btrfs";
+    options = ["noatime" "compress=no"];
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
