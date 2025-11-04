@@ -28,6 +28,7 @@ in
       ++ (
         with pkgs; [
           iterm2
+          inferno
           postgresql
           jetbrains.idea-community
           gh
