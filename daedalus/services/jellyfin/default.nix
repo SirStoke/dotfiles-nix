@@ -8,7 +8,7 @@
     enable = true;
     openFirewall = true;
     package = unstablePkgs.jellyfin;
-    dataDir = "/var/data/plex";
+    dataDir = "/var/data/jellyfin";
     user = "plex"; # Cannot be bothered
   };
 }

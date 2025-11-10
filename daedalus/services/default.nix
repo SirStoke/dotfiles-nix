@@ -13,7 +13,9 @@
     ./radarr
     ./sonarr
     ./bazarr
-    ./toggled
+    # Toggl has restricted API usage,
+    # will have to figure something out
+    #./toggled
     ./clickhouse
     ./otel-collector
     ./grafana
