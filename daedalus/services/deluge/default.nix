@@ -8,5 +8,6 @@
     web.enable = true;
 
     dataDir = "/var/data/deluge";
+    group = "media";
   };
 }

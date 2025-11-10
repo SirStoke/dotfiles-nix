@@ -21,26 +21,6 @@
 
   exporter = name: port: exporter_path name port "/metrics";
 
-  otel-contrib = let
-    version = "0.107.0";
-
-    src = pkgs.fetchFromGitHub {
-      owner = "open-telemetry";
-      repo = "opentelemetry-collector-contrib";
-      rev = "v${version}";
-      sha256 = "sha256-U6ZewP0J8Ib2IY46KBv4xwLMWbREqx4IesJ2Q8geDjM=";
-    };
-  in
-    # buildGoModule doesn't support overrideAttrs, and life is painful like that sometimes
-    pkgs.opentelemetry-collector-contrib.override rec {
-      buildGoModule = args:
-        pkgs.buildGoModule (args
-          // {
-            inherit src version;
-            vendorHash = "sha256-eA2LtZYmRuDtitJ8ValmXfCT116cJBR9KyWcpxGnNx4=";
-          });
-    };
-
   settingsFormat = pkgs.formats.yaml {};
 
   settings = {
@@ -91,7 +71,7 @@ in {
       conf = settingsFormat.generate "config.yaml" settings;
     in {
       ExecStartPre = ["/etc/opentelemetry-collector/wait-for-9000.sh"];
-      ExecStart = "${lib.getExe otel-contrib} --config=file:${conf}";
+      ExecStart = "${lib.getExe pkgs.opentelemetry-collector-contrib} --config=file:${conf}";
       DynamicUser = true;
       Restart = "always";
       ProtectSystem = "full";

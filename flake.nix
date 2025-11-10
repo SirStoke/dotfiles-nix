@@ -133,8 +133,8 @@
 
           modules = [./home-darwin.nix];
         };
-      
-     homeConfigurations.sandro-linux = let
+
+      homeConfigurations.sandro-linux = let
         system = "aarch64-linux";
 
         unsupportedPkgs = import nixpkgs {

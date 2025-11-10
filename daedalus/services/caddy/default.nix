@@ -3,53 +3,16 @@
   lib,
   ...
 }: let
-  cloudflare-caddy = with pkgs;
-    caddy.override {
-      buildGoModule = args:
-        buildGoModule (args
-          // {
-            src = stdenv.mkDerivation rec {
-              pname = "caddy-using-xcaddy-${xcaddy.version}-cloudflare";
-              inherit (caddy) version;
+  cloudflare-caddy = pkgs.caddy.withPlugins {
+    plugins = [
+      # https://github.com/caddy-dns/cloudflare
+      "github.com/caddy-dns/cloudflare@2fc25ee62f40fe21b240f83ab2fb6e2be6dbb953"
+    ];
 
-              dontUnpack = true;
-              dontFixup = true;
+    hash = "sha256-Z8nPh4OI3/R1nn667ZC5VgE+Q9vDenaQ3QPKxmqPNkc=";
 
-              nativeBuildInputs = [
-                cacert
-                go
-              ];
-
-              plugins = [
-                # https://github.com/caddy-dns/cloudflare
-                "github.com/caddy-dns/cloudflare@89f16b99c18ef49c8bb470a82f895bce01cbaece"
-              ];
-
-              configurePhase = ''
-                export GOCACHE=$TMPDIR/go-cache
-                export GOPATH="$TMPDIR/go"
-                export XCADDY_SKIP_BUILD=1
-              '';
-
-              buildPhase = ''
-                ${xcaddy}/bin/xcaddy build "${caddy.src.rev}" ${lib.concatMapStringsSep " " (plugin: "--with ${plugin}") plugins}
-                cd buildenv*
-                go mod vendor
-              '';
-
-              installPhase = ''
-                cp -r --reflink=auto . $out
-              '';
-
-              outputHash = "sha256-Aqu2st8blQr/Ekia2KrH1AP/2BVZIN4jOJpdLc1Rr4g=";
-              outputHashMode = "recursive";
-            };
-
-            subPackages = ["."];
-            ldflags = ["-s" "-w"]; ## don't include version info twice
-            vendorHash = null;
-          });
-    };
+    doInstallCheck = false;
+  };
 
   virtualHost = subdomain: port: {
     virtualHosts."${subdomain}.sirstoke.me".extraConfig = ''

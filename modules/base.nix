@@ -75,7 +75,8 @@ in {
 
   # Packages are mainly installed by home-manager, this is the strict necessary
   environment.systemPackages = with pkgs; [
-    vim btrfs-progs
+    vim
+    btrfs-progs
   ];
 
   services.openssh.enable = true;
@@ -147,7 +148,7 @@ in {
 
   programs.firejail.enable = true;
 
-  boot.kernelParams = [ "amdgpu.dcdebugmask=0x10" ];
+  boot.kernelParams = ["amdgpu.dcdebugmask=0x10"];
 
   xdg.portal.enable = true;
 

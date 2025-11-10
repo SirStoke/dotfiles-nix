@@ -68,9 +68,11 @@
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
+  users.groups.media = {};
+
   users.users.sandro = {
     isNormalUser = true;
-    extraGroups = ["wheel" "networkmanager" "docker"];
+    extraGroups = ["wheel" "networkmanager" "docker" "media"];
     shell = pkgs.zsh;
     hashedPassword = "$6$nlzgALREFEkm.Ldo$SK7SGTdlawCbe1DelOg8qxvBOXcdFLvU/xqUN/tNgsFtjO/EOmSKK5tFVt7ajTrwy2Vf.OlnWFc5S4Lsn4Ye0/";
   };
