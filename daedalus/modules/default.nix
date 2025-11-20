@@ -8,5 +8,6 @@
     ./hardware-configuration.nix
     ./secrets.nix
     ./duplicity.nix
+    ./ollama.nix
   ];
 }

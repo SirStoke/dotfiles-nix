@@ -77,6 +77,7 @@ in {
   environment.systemPackages = with pkgs; [
     vim
     btrfs-progs
+    ollama
   ];
 
   services.openssh.enable = true;
