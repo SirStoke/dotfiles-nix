@@ -3,10 +3,6 @@ return {
   dependencies = {
     'nvim-lua/plenary.nvim',
     {
-      'j-hui/fidget.nvim',
-      opts = {},
-    },
-    {
       'mfussenegger/nvim-dap',
       config = function(self, opts)
         -- Debug settings if you're using nvim-dap
