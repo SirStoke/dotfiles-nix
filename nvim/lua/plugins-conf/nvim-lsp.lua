@@ -13,7 +13,10 @@ return {
   opts = {
     servers = {
       clangd = {
+        -- On NixOS, we really need to manage clangd with clang-tools
+        -- I usually do it in devbox.json for each project
         mason = false,
+        enabled = true,
       },
     },
   },
@@ -134,7 +137,6 @@ return {
     --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
     local servers = {
       rust_analyzer = {},
-      clangd = {},
 
       lua_ls = {
         settings = {
@@ -164,17 +166,8 @@ return {
 
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-    require('mason-lspconfig').setup {
-      handlers = {
-        function(server_name)
-          local server = servers[server_name] or {}
-          -- This handles overriding only values explicitly passed
-          -- by the server configuration above. Useful when disabling
-          -- certain features of an LSP (for example, turning off formatting for tsserver)
-          server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-          vim.lsp.config(server_name, server)
-        end,
-      },
-    }
+    require('mason-lspconfig').setup {}
+
+    vim.lsp.enable 'clangd'
   end,
 }

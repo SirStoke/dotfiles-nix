@@ -17,6 +17,7 @@ return {
       desc = 'Dismiss All Notifications',
     },
   },
+  opts = {},
   init = function()
     vim.notify = require('fidget').notify
   end,
