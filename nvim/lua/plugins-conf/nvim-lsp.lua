@@ -137,6 +137,7 @@ return {
     --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
     local servers = {
       rust_analyzer = {},
+      zls = {},
 
       lua_ls = {
         settings = {
@@ -169,5 +170,6 @@ return {
     require('mason-lspconfig').setup {}
 
     vim.lsp.enable 'clangd'
+    vim.lsp.enable 'zls'
   end,
 }
