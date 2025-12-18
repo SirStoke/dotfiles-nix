@@ -68,7 +68,11 @@
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
-  users.groups.media = {};
+  users.mutableUsers = true;
+
+  users.groups.media = {
+    members = ["sandro" "deluge" "radarr" "sonarr" "jackett" "plex" "bazarr" "caddy" "jellyfin" "grafana"];
+  };
 
   users.users.sandro = {
     isNormalUser = true;
