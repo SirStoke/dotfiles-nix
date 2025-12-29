@@ -61,6 +61,8 @@ in
 
                source ~/.zsh_work_env
 
+
+        export EDITOR=nvim
         alias vim=nvim
       '';
 
