@@ -12,12 +12,6 @@ in
     home.packages =
       base.home.packages
       ++ (with pkgs; [
-        libsForQt5.bismuth
-        pinentry
-        (pkgs.ungoogled-chromium.override {
-          commandLineArgs = ["--force-dark-mode"];
-          enableWideVine = true;
-        })
         xclip
         terminator
         powerline-fonts
@@ -48,6 +42,7 @@ in
         zoom-us
         pkgsi686Linux.vulkan-tools
         appimage-run
+        bambu-studio
       ])
       ++ (with unstablePkgs; [qbittorrent ghostty])
       ++ (with nix-alien-pkgs; [nix-alien]);

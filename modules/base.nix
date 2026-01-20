@@ -49,29 +49,20 @@ in {
 
   security.sudo.wheelNeedsPassword = false;
 
-  services.xserver = {
-    enable = true;
-    layout = "us";
-  };
-
-  services.xserver.videoDrivers = ["amdgpu"];
-
   hardware.opengl.enable = true;
 
   hardware.opengl.extraPackages = [pkgs.rocmPackages.clr];
 
   hardware.amdgpu.opencl.enable = true;
 
-  services.xserver.desktopManager.plasma5.enable = true;
+  services.desktopManager.plasma6.enable = true;
+  
+  services.displayManager.sddm.enable = true;
 
   services.displayManager.sddm.autoLogin = {
     user = "sandro";
     enable = true;
   };
-
-  services.xrdp.enable = true;
-  services.xrdp.defaultWindowManager = "startplasma-x11";
-  services.xrdp.openFirewall = true;
 
   # Packages are mainly installed by home-manager, this is the strict necessary
   environment.systemPackages = with pkgs; [

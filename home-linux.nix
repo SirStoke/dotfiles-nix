@@ -15,8 +15,6 @@ in
     home.packages =
       base.home.packages
       ++ (with pkgs; [
-        libsForQt5.bismuth
-        pinentry
         xclip
         signal-desktop
         jetbrains.idea-community
