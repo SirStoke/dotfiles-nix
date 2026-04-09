@@ -44,7 +44,7 @@ in
         appimage-run
         bambu-studio
       ])
-      ++ (with unstablePkgs; [qbittorrent ghostty claude-code])
+      ++ (with unstablePkgs; [qbittorrent ghostty claude-code heroic godot])
       ++ (with nix-alien-pkgs; [nix-alien]);
 
     programs.zsh.initExtra =

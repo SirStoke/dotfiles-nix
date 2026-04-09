@@ -286,7 +286,7 @@ require('lazy').setup({
   --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
   -- { import = 'custom.plugins' },
   require 'plugins-conf.metals',
-
+  { 'Mathijs-Bakker/godotdev.nvim', opts = {} },
   {
     'folke/trouble.nvim',
     cmd = { 'Trouble' },
