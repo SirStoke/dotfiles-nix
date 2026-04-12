@@ -43,6 +43,7 @@ in
         pkgsi686Linux.vulkan-tools
         appimage-run
         bambu-studio
+        gimp2
       ])
       ++ (with unstablePkgs; [qbittorrent ghostty claude-code heroic godot])
       ++ (with nix-alien-pkgs; [nix-alien]);
