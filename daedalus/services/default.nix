@@ -21,5 +21,6 @@
     ./grafana
     ./prometheus-exporters
     ./mealie
+    ./anisette
   ];
 }

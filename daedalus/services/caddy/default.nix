@@ -60,6 +60,7 @@ in {
       (virtualHost "bazarr" 6767)
       (virtualHost "grafana" 3000)
       (virtualHost "mealie" 9000)
+      (virtualHost "pear" 6969)
       (serveStatic "static")
     ]);
 
