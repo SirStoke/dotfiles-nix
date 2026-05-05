@@ -22,5 +22,8 @@
     ./prometheus-exporters
     ./mealie
     ./anisette
+    ./nginx-cors
+    ./byparr
+    ./prowlarr
   ];
 }

@@ -61,7 +61,9 @@ in {
       (virtualHost "grafana" 3000)
       (virtualHost "mealie" 9000)
       (virtualHost "pear" 6969)
+      (virtualHost "anycors" 6868)
       (serveStatic "static")
+      (serveStatic "apps")
     ]);
 
   systemd.services.caddy.serviceConfig.SupplementaryGroups = "media";
