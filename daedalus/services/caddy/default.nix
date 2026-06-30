@@ -9,7 +9,7 @@
       "github.com/caddy-dns/cloudflare@2fc25ee62f40fe21b240f83ab2fb6e2be6dbb953"
     ];
 
-    hash = "sha256-Gb1nC5fZfj7IodQmKmEPGygIHNYhKWV1L0JJiqnVtbs=";
+    hash = "sha256-deM83dbUzh1rUoGETEk5VPTl5VWDsEwxovz+iikVpjQ";
 
     doInstallCheck = false;
   };

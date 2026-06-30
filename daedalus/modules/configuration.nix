@@ -19,6 +19,7 @@
 
   # The key is stored raw in a disk partition, so this is an hack to load the partitions before ZFS initializes
   boot.zfs.devNodes = lib.mkForce "/dev/disk/by-partuuid";
+  boot.initrd.systemd.enable = false;
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-id/ata-Samsung_Portable_SSD_T5_S46VNP0MC07645W-part2";
