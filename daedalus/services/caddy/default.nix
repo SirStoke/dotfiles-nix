@@ -9,7 +9,7 @@
       "github.com/caddy-dns/cloudflare@2fc25ee62f40fe21b240f83ab2fb6e2be6dbb953"
     ];
 
-    hash = "sha256-deM83dbUzh1rUoGETEk5VPTl5VWDsEwxovz+iikVpjQ";
+    hash = "sha256-wHW0l15aLswe7gV9WioXo//abd0sJI82I7zIroRG3uU=";
 
     doInstallCheck = false;
   };
@@ -60,6 +60,7 @@ in {
       (virtualHost "bazarr" 6767)
       (virtualHost "grafana" 3000)
       (virtualHost "mealie" 9000)
+      (virtualHost "aghanim" 9119)
       (virtualHost "pear" 6969)
       (virtualHost "anycors" 6868)
       (serveStatic "static")

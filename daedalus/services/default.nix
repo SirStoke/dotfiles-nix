@@ -19,6 +19,7 @@
     ./clickhouse
     ./otel-collector
     ./grafana
+    ./hermes-agent
     ./prometheus-exporters
     ./mealie
     ./anisette
