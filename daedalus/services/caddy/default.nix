@@ -60,6 +60,7 @@ in {
       (virtualHost "bazarr" 6767)
       (virtualHost "grafana" 3000)
       (virtualHost "mealie" 9000)
+      (virtualHost "aghanim" 9119)
       (virtualHost "pear" 6969)
       (virtualHost "anycors" 6868)
       (serveStatic "static")
