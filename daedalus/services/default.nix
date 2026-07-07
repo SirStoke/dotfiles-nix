@@ -26,5 +26,6 @@
     ./nginx-cors
     ./byparr
     ./prowlarr
+    ./postgrest
   ];
 }
