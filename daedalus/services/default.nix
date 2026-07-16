@@ -12,6 +12,7 @@
     ./jellyfin
     ./radarr
     ./sonarr
+    ./unmanic
     ./bazarr
     # Toggl has restricted API usage,
     # will have to figure something out
