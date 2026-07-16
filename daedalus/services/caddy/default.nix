@@ -57,6 +57,7 @@ in {
       (virtualHost "deluge" 8112)
       (virtualHost "sonarr" 8989)
       (virtualHost "radarr" 7878)
+      (virtualHost "unmanic" 8888)
       (virtualHost "bazarr" 6767)
       (virtualHost "grafana" 3000)
       (virtualHost "mealie" 9000)
