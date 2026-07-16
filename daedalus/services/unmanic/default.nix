@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   virtualisation.oci-containers.containers.unmanic = {
-    image = "josh5/unmanic@sha256:3751881e8129e412c64453e6d11ff3fb1469121eeb271c73ad63f925a9f5c910";
+    image = "josh5/unmanic@sha256:db7aa486154b918a8a6303bf08bc20de2a4a001e95f580df6721cc5c8f01ec58";
     ports = ["127.0.0.1:8888:8888"];
     volumes = [
       "/var/data/unmanic:/config"
