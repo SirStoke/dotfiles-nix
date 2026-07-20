@@ -14,8 +14,23 @@
       values (true)
       on conflict (ok) do update set checked_at = now();
 
+    create table if not exists api.map_annotations (
+      map_id text not null,
+      map_version text not null,
+      hero_id text not null,
+      mode_id text not null,
+      task_id text not null,
+      x double precision not null check (x between 0 and 1),
+      y double precision not null check (y between 0 and 1),
+      updated_at timestamptz not null default now(),
+      primary key (map_id, map_version, hero_id, mode_id, task_id)
+    );
+
     grant select on api.health to web_anon;
+    grant select, insert, update on api.map_annotations to web_anon;
     grant web_anon to postgrest;
+
+    notify pgrst, 'reload schema';
   '';
 in {
   systemd.services.podman-postgrest-network = {
