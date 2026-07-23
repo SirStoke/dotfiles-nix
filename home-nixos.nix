@@ -43,14 +43,16 @@ in
         pkgsi686Linux.vulkan-tools
         appimage-run
         bambu-studio
+        gimp2
       ])
-      ++ (with unstablePkgs; [qbittorrent ghostty])
+      ++ (with unstablePkgs; [qbittorrent ghostty claude-code heroic godot])
       ++ (with nix-alien-pkgs; [nix-alien]);
 
     programs.zsh.initExtra =
       base.programs.zsh.initExtra
       + ''
         alias nrs="sudo nixos-rebuild switch --flake '$HOME/src/dotfiles-nix#mjollnir'"
+        source ~/.zshrc_secrets
       '';
 
     home.file."/home/sandro/.config/terminator/config".text = builtins.readFile ./home/terminator-config;

@@ -33,6 +33,9 @@ in {
 
   users.mutableUsers = false;
 
+  users.groups.plugdev = {
+  };
+
   users.users.sandro = {
     isNormalUser = true;
     extraGroups = ["wheel" "networkmanager" "docker" "plugdev"];
@@ -56,7 +59,7 @@ in {
   hardware.amdgpu.opencl.enable = true;
 
   services.desktopManager.plasma6.enable = true;
-  
+
   services.displayManager.sddm.enable = true;
 
   services.displayManager.sddm.autoLogin = {
@@ -111,6 +114,18 @@ in {
   hardware.enableAllFirmware = true;
 
   networking.firewall.allowedTCPPorts = [42000 42001];
+  networking.firewall.checkReversePath = false;
+
+  networking.networkmanager.plugins = with pkgs; [
+    networkmanager-fortisslvpn
+    networkmanager-iodine
+    networkmanager-l2tp
+    networkmanager-openconnect
+    networkmanager-openvpn
+    networkmanager-sstp
+    networkmanager-strongswan
+    networkmanager-vpnc
+  ];
 
   programs.partition-manager.enable = true;
 
@@ -127,13 +142,7 @@ in {
   services.sunshine = {
     enable = true;
     openFirewall = true;
-    settings = {
-      capture = "x11";
-      encoder = "amdvce";
-      #amd_quality = "quality";
-      #amd_usage = "lowlatency_high_quality";
-      output_name = 1;
-    };
+    capSysAdmin = true;
   };
 
   services.tailscale.enable = true;
