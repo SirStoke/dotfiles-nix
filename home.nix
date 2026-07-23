@@ -164,7 +164,7 @@ in {
   programs.zsh.oh-my-zsh = {
     enable = true;
     plugins = ["git" "node" "npm" "nvm" "scala" "sbt" "pip" "github" "vundle" "gpg-agent" "git-lfs" "iterm2" "macos" "sdk" "docker" "docker-compose" "rust" "aws"];
-    custom = "$HOME/.zsh-custom";
+    custom = "${config.home.homeDirectory}/.zsh-custom";
     theme = "lambda-gitster";
   };
 
