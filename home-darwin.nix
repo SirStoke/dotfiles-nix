@@ -30,7 +30,6 @@ in
           iterm2
           inferno
           postgresql
-          jetbrains.idea-community
           gh
           powerline-fonts
           kubectx
