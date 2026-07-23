@@ -42,6 +42,7 @@ in {
     cachix
     luajitPackages.luarocks
     coursier
+    tree-sitter
   ];
 
   home.stateVersion = "22.11";
