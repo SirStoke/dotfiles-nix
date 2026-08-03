@@ -30,7 +30,6 @@ in
           iterm2
           inferno
           postgresql
-          jetbrains.idea-community
           gh
           powerline-fonts
           kubectx
@@ -64,6 +63,8 @@ in
 
         export EDITOR=nvim
         alias vim=nvim
+
+        export PATH="$HOME/.local/bin:$PATH"
       '';
 
     programs.git =
@@ -80,6 +81,8 @@ in
     programs.zsh.shellAliases = {
       hm-switch = "cd ~/src/dotfiles-nix && nix flake update && home-manager switch --flake .#sandro-darwin; cd -";
     };
+
+    programs.direnv.package = pkgs.direnv.overrideAttrs (_: {doCheck = false;});
 
     programs.gpg.enable = true;
 
