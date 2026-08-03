@@ -4,6 +4,7 @@
   ...
 }: {
   imports = [
+    ./airtrail
     ./baserow
     ./caddy
     ./deluge

@@ -65,6 +65,7 @@ in {
       (virtualHost "pear" 6969)
       (virtualHost "anycors" 6868)
       (virtualHost "postgrest" 3001)
+      (virtualHost "airtrail" 3002)
       (serveStatic "static")
       (serveStatic "apps")
     ]);
