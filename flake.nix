@@ -44,6 +44,7 @@
           specialArgs = attrs;
           modules = [
             ./modules
+            ./modules/moonlight-web-stream.nix
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
