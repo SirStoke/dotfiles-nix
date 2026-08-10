@@ -22,6 +22,14 @@
     '';
   };
 
+  loopbackVirtualHost = subdomain: port: {
+    virtualHosts."${subdomain}.sirstoke.me".extraConfig = ''
+      reverse_proxy 127.0.0.1:${toString port}
+
+      import /run/agenix/cloudflare-dns
+    '';
+  };
+
   serveStatic = subdomain: {
     virtualHosts."${subdomain}.sirstoke.me".extraConfig = ''
       handle_path /* {
@@ -60,6 +68,8 @@ in {
       (virtualHost "unmanic" 8888)
       (virtualHost "bazarr" 6767)
       (virtualHost "grafana" 3000)
+      # Home Assistant's trigger-only API; nginx owns the exact-path allowlist.
+      (loopbackVirtualHost "ha-trigger" 18124)
       (virtualHost "mealie" 9000)
       (virtualHost "aghanim" 9119)
       (virtualHost "pear" 6969)
