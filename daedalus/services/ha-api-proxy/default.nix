@@ -10,13 +10,19 @@
   # Add entries as `endpoint-name = "script.entity_id";`. Call them with:
   #   curl -X POST https://ha-trigger.sirstoke.me/scripts/endpoint-name
   scripts = {
-    # bedtime = "script.bedtime";
+    # This scene turns on lights in the office as they're meant to be on
+    # depending on time of day.
+    adjust_office_lights = "script.set_office_scene";
   };
 
   # Add entries as `endpoint-name = "automation.entity_id";`. Call them with:
   #   curl -X POST https://ha-trigger.sirstoke.me/automations/endpoint-name
   automations = {
-    # arrival = "automation.arrival";
+     vacuum_living_room = "automation.vacuum_living_room";
+     turn_off_all_lights = "automation.turn_off_all_lights";
+     living_room_lights = "automation.living_room_lights";
+     mop_after_sweep = "automation.mop_after_sweep";
+     vacuum = "automation.vacuum_whole_house";
   };
 
   validEndpoint = endpoint: builtins.match "[a-z0-9][a-z0-9_-]*" endpoint != null;
@@ -36,8 +42,12 @@
       proxy_set_header Host steamdeck:8123;
       proxy_set_header Authorization "Bearer $ha_token";
       proxy_set_header Content-Type application/json;
-      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-      proxy_set_header X-Forwarded-Proto $scheme;
+
+      # Do NOT tell HA we're a proxy, cause it's picky like that
+      proxy_set_header X-Forwarded-For "";
+      proxy_set_header X-Real-IP "";
+      proxy_set_header Forwarded "";
+
       proxy_buffering off;
       proxy_pass_request_body off;
       proxy_set_body '${body}';
