@@ -9,6 +9,7 @@ in {
 
     enable = true;
     root = /var/data;
+    exclude = ["/var/data/secrets"];
     fullIfOlderThan = "1M";
     extraFlags = [
       "--s3-endpoint-url"

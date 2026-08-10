@@ -21,6 +21,7 @@
     ./clickhouse
     ./otel-collector
     ./grafana
+    ./ha-api-proxy
     ./hermes-agent
     ./prometheus-exporters
     ./mealie
