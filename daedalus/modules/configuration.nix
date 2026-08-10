@@ -63,6 +63,7 @@
     wget
     clang
     unzip
+    ffmpeg
   ];
 
   programs.zsh.enable = true;
