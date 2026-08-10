@@ -18,11 +18,11 @@
   # Add entries as `endpoint-name = "automation.entity_id";`. Call them with:
   #   curl -X POST https://ha-trigger.sirstoke.me/automations/endpoint-name
   automations = {
-     vacuum_living_room = "automation.vacuum_living_room";
-     turn_off_all_lights = "automation.turn_off_all_lights";
-     living_room_lights = "automation.living_room_lights";
-     mop_after_sweep = "automation.mop_after_sweep";
-     vacuum = "automation.vacuum_whole_house";
+    vacuum_living_room = "automation.vacuum_living_room";
+    turn_off_all_lights = "automation.turn_off_all_lights";
+    living_room_lights = "automation.living_room_lights";
+    mop_after_sweep = "automation.mop_after_sweep";
+    vacuum = "automation.vacuum_whole_house";
   };
 
   validEndpoint = endpoint: builtins.match "[a-z0-9][a-z0-9_-]*" endpoint != null;
