@@ -2,6 +2,10 @@
   targetUrl = "s3://daedalus-bkp";
   secretFile = /run/agenix/duplicity-secrets;
   endpointUrl = "https://s3.eu-central-003.backblazeb2.com";
+  checksumEnvironment = {
+    AWS_REQUEST_CHECKSUM_CALCULATION = "when_required";
+    AWS_RESPONSE_CHECKSUM_VALIDATION = "when_required";
+  };
 in {
   services.duplicity = {
     inherit targetUrl;
@@ -20,6 +24,8 @@ in {
     ];
     cleanup.maxFull = 1;
   };
+
+  systemd.services.duplicity.environment = checksumEnvironment;
 
   systemd.timers."duplicity-exporter" = {
     wantedBy = ["timers.target"];
@@ -67,6 +73,7 @@ in {
 
     lastBackupJson = otlpMetricJson "last_full_backup" "Last duplicity full backup";
   in {
+    environment = checksumEnvironment;
     script = ''
       DATE_STR="$(${pkgs.duplicity}/bin/duplicity collection-status 's3://daedalus-bkp' --s3-endpoint-url 'https://s3.eu-central-003.backblazeb2.com' | grep 'Last full backup date:' | sed 's/Last full backup date: //g')"
       LAST_FULL_BACKUP=$(date -d "$DATE_STR" '+%s%3N')
