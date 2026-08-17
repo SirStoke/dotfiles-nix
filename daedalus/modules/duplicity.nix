@@ -7,6 +7,14 @@
     AWS_RESPONSE_CHECKSUM_VALIDATION = "when_required";
   };
 in {
+  nixpkgs.overlays = [
+    (_: prev: {
+      duplicity = prev.duplicity.overrideAttrs (old: {
+        patches = (old.patches or []) ++ [./patches/duplicity-s3-diagnostics.patch];
+      });
+    })
+  ];
+
   services.duplicity = {
     inherit targetUrl;
     inherit secretFile;
