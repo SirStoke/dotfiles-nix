@@ -1,0 +1,27 @@
+diff --git a/duplicity/backends/s3_boto3_backend.py b/duplicity/backends/s3_boto3_backend.py
+index 05d2036..7ecadd1 100644
+--- a/duplicity/backends/s3_boto3_backend.py
++++ b/duplicity/backends/s3_boto3_backend.py
+@@ -112,6 +112,13 @@ class S3Boto3Backend(duplicity.backend.Backend):
+             endpoint_url=config.s3_endpoint_url,
+         )
+ 
++        client_config = self.s3.meta.client.meta.config
++        log.Notice(
++            "S3 boto client checksum configuration: "
++            f"request_checksum_calculation={client_config.request_checksum_calculation}, "
++            f"response_checksum_validation={client_config.response_checksum_validation}"
++        )
++
+         try:
+             self.s3.meta.client.head_bucket(Bucket=self.bucket_name)
+         except botocore.exceptions.ClientError as bce:
+@@ -215,6 +222,7 @@ class S3Boto3Backend(duplicity.backend.Backend):
+                     f"Failed to upload file {remote_filename}, got S3UploadFailedError\n"
+                     f"See https://gitlab.com/duplicity/duplicity/-/issues/870 for details.\n"
+-                    f"Quick fix is: [sudo] pip3 install boto3<1.36.0 botocore<1.36.0"
++                    f"Quick fix is: [sudo] pip3 install boto3<1.36.0 botocore<1.36.0\n"
++                    f"API-Error: {e}"
+                 )
+             else:
+                 raise e
