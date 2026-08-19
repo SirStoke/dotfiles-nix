@@ -16,7 +16,19 @@ index 05d2036..7ecadd1 100644
          try:
              self.s3.meta.client.head_bucket(Bucket=self.bucket_name)
          except botocore.exceptions.ClientError as bce:
-@@ -215,6 +222,7 @@ class S3Boto3Backend(duplicity.backend.Backend):
+@@ -214,10 +221,18 @@ class S3Boto3Backend(duplicity.backend.Backend):
+             )
+         except S3UploadFailedError as e:
+-            if boto3.__version__ > "1.36.0" or botocore.__version__ > "1.36.0":
++            client_config = self.s3.meta.client.meta.config
++            checksum_workaround_active = (
++                client_config.request_checksum_calculation == "when_required"
++                and client_config.response_checksum_validation == "when_required"
++            )
++            if (
++                boto3.__version__ > "1.36.0" or botocore.__version__ > "1.36.0"
++            ) and not checksum_workaround_active:
+                 log.FatalError(
                      f"Failed to upload file {remote_filename}, got S3UploadFailedError\n"
                      f"See https://gitlab.com/duplicity/duplicity/-/issues/870 for details.\n"
 -                    f"Quick fix is: [sudo] pip3 install boto3<1.36.0 botocore<1.36.0"
