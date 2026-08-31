@@ -9,7 +9,7 @@
       "github.com/caddy-dns/cloudflare@2fc25ee62f40fe21b240f83ab2fb6e2be6dbb953"
     ];
 
-    hash = "sha256-Z8nPh4OI3/R1nn667ZC5VgE+Q9vDenaQ3QPKxmqPNkc=";
+    hash = "sha256-mqIa0wI/VfjDblg0NnkzKllWHXZZPLwHP8xEVSwZuPE=";
 
     doInstallCheck = false;
   };
@@ -17,6 +17,14 @@
   virtualHost = subdomain: port: {
     virtualHosts."${subdomain}.sirstoke.me".extraConfig = ''
       reverse_proxy localhost:${toString port}
+
+      import /run/agenix/cloudflare-dns
+    '';
+  };
+
+  loopbackVirtualHost = subdomain: port: {
+    virtualHosts."${subdomain}.sirstoke.me".extraConfig = ''
+      reverse_proxy 127.0.0.1:${toString port}
 
       import /run/agenix/cloudflare-dns
     '';
@@ -57,10 +65,19 @@ in {
       (virtualHost "deluge" 8112)
       (virtualHost "sonarr" 8989)
       (virtualHost "radarr" 7878)
+      (virtualHost "unmanic" 8888)
       (virtualHost "bazarr" 6767)
       (virtualHost "grafana" 3000)
+      # Home Assistant's trigger-only API; nginx owns the exact-path allowlist.
+      (loopbackVirtualHost "ha-trigger" 18124)
       (virtualHost "mealie" 9000)
+      (virtualHost "aghanim" 9119)
+      (virtualHost "pear" 6969)
+      (virtualHost "anycors" 6868)
+      (virtualHost "postgrest" 3001)
+      (virtualHost "airtrail" 3002)
       (serveStatic "static")
+      (serveStatic "apps")
     ]);
 
   systemd.services.caddy.serviceConfig.SupplementaryGroups = "media";

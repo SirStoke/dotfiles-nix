@@ -59,7 +59,7 @@ in {
   hardware.amdgpu.opencl.enable = true;
 
   services.desktopManager.plasma6.enable = true;
-  
+
   services.displayManager.sddm.enable = true;
 
   services.displayManager.sddm.autoLogin = {
@@ -126,7 +126,6 @@ in {
     networkmanager-strongswan
     networkmanager-vpnc
   ];
-
 
   programs.partition-manager.enable = true;
 

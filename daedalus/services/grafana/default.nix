@@ -6,7 +6,9 @@
   services.grafana = {
     enable = true;
 
-    settings = {};
+    settings = {
+      security.secret_key = "SW2YcwTIb9zpOOhoPsMm";
+    };
     dataDir = "/var/data/grafana";
   };
 }
