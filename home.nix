@@ -156,7 +156,7 @@ in {
     difftastic.enable = true;
     lfs.enable = true;
 
-    extraConfig.url."https://github.com/rust-lang/crates.io-index".insteadOf = https://github.com/rust-lang/crates.io-index;
+    #extraConfig.url."https://github.com/rust-lang/crates.io-index".insteadOf = https://github.com/rust-lang/crates.io-index;
     extraConfig.credential."https://github.com".useHttpPath = true;
   };
 
@@ -175,4 +175,5 @@ in {
   programs.fzf.enableZshIntegration = true;
 
   programs.direnv.enable = true;
+  programs.direnv.package = pkgs.direnv.overrideAttrs (_: { doCheck = false; });
 }
