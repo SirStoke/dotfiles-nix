@@ -1,7 +1,7 @@
 { lib, ... }:
 
 let
-  mobileNixos = ./mobile-nixos/;
+  mobileNixos = /etc/nixos/mobile-nixos;
   pinnedNixpkgs = (import (mobileNixos + "/npins")).nixpkgs;
 in
 {
