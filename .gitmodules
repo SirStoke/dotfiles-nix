@@ -1,3 +1,0 @@
-[submodule "basilius/mobile-nixos"]
-	path = basilius/mobile-nixos
-	url = https://github.com/mobile-nixos/mobile-nixos.git
