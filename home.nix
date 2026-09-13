@@ -176,5 +176,5 @@ in {
   programs.fzf.enableZshIntegration = true;
 
   programs.direnv.enable = true;
-  programs.direnv.package = pkgs.direnv.overrideAttrs (_: { doCheck = false; });
+  programs.direnv.package = pkgs.direnv.overrideAttrs (_: {doCheck = false;});
 }

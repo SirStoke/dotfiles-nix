@@ -59,6 +59,17 @@
           ];
         };
 
+      nixosConfigurations.basilius = let
+        system = "aarch64-linux";
+      in
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+
+          modules = [
+            ./basilius/configuration.nix
+          ];
+        };
+
       nixosConfigurations.daedalus = let
         system = "x86_64-linux";
 
