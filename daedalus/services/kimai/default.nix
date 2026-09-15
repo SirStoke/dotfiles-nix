@@ -1,9 +1,17 @@
 {pkgs, ...}: let
-  environmentFile = "/var/lib/kimai/kimai.env";
-  adminPasswordFile = "/var/lib/kimai/admin-password";
+  stateDirectory = "/var/data/kimai";
+  environmentFile = "${stateDirectory}/kimai.env";
+  adminPasswordFile = "${stateDirectory}/admin-password";
   networkService = "podman-kimai-network.service";
   environmentService = "kimai-environment.service";
 in {
+  systemd.tmpfiles.rules = [
+    "d ${stateDirectory} 0750 root media -"
+    "d ${stateDirectory}/mysql 0750 root root -"
+    "d ${stateDirectory}/data 0750 root root -"
+    "d ${stateDirectory}/plugins 0750 root root -"
+  ];
+
   systemd.services.podman-kimai-network = {
     path = [pkgs.podman];
     serviceConfig = {
@@ -20,8 +28,6 @@ in {
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;
-      StateDirectory = "kimai";
-      StateDirectoryMode = "0750";
       Group = "media";
       UMask = "0077";
     };
@@ -31,8 +37,8 @@ in {
         root_password="$(${pkgs.openssl}/bin/openssl rand -hex 32)"
         app_secret="$(${pkgs.openssl}/bin/openssl rand -hex 64)"
         admin_password="$(${pkgs.openssl}/bin/openssl rand -hex 32)"
-        environment_temporary="$(${pkgs.coreutils}/bin/mktemp /var/lib/kimai/kimai.env.XXXXXX)"
-        admin_temporary="$(${pkgs.coreutils}/bin/mktemp /var/lib/kimai/admin-password.XXXXXX)"
+        environment_temporary="$(${pkgs.coreutils}/bin/mktemp ${stateDirectory}/kimai.env.XXXXXX)"
+        admin_temporary="$(${pkgs.coreutils}/bin/mktemp ${stateDirectory}/admin-password.XXXXXX)"
 
         cleanup() {
           rm -f "$environment_temporary" "$admin_temporary"
@@ -62,7 +68,7 @@ in {
 
       if [[ ! -e ${adminPasswordFile} ]]; then
         admin_password="$(${pkgs.gnused}/bin/sed -n 's/^ADMINPASS=//p' ${environmentFile})"
-        admin_temporary="$(${pkgs.coreutils}/bin/mktemp /var/lib/kimai/admin-password.XXXXXX)"
+        admin_temporary="$(${pkgs.coreutils}/bin/mktemp ${stateDirectory}/admin-password.XXXXXX)"
         printf '%s\n' "$admin_password" >"$admin_temporary"
         chown root:media "$admin_temporary"
         chmod 0640 "$admin_temporary"
@@ -116,7 +122,7 @@ in {
   virtualisation.oci-containers.containers = {
     kimai-db = {
       image = "mysql:8.3@sha256:9de9d54fecee6253130e65154b930978b1fcc336bcc86dfd06e89b72a2588ebe";
-      volumes = ["kimai-mysql:/var/lib/mysql"];
+      volumes = ["${stateDirectory}/mysql:/var/lib/mysql:U"];
       environmentFiles = [environmentFile];
       cmd = ["--default-storage-engine=InnoDB"];
       extraOptions = ["--network=kimai"];
@@ -126,8 +132,8 @@ in {
       image = "kimai/kimai2:stable@sha256:3084f1e5ecdc10afafc193911039a06cdabda4473f3a48d62edbe460e3c154ee";
       ports = ["127.0.0.1:8001:8001"];
       volumes = [
-        "kimai-data:/opt/kimai/var/data"
-        "kimai-plugins:/opt/kimai/var/plugins"
+        "${stateDirectory}/data:/opt/kimai/var/data:U"
+        "${stateDirectory}/plugins:/opt/kimai/var/plugins:U"
       ];
       environmentFiles = [environmentFile];
       dependsOn = ["kimai-db"];
