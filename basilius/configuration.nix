@@ -2,11 +2,11 @@
   mobileNixos = /etc/nixos/mobile-nixos;
   pinnedNixpkgs = (import (mobileNixos + "/npins")).nixpkgs;
 in {
-  imports = [
-    (import (mobileNixos + "/lib/configuration.nix") {
-      device = "oneplus-enchilada";
-    })
-  ];
+#  imports = [
+#    (import (mobileNixos + "/lib/configuration.nix") {
+#      device = "oneplus-enchilada";
+#    })
+#  ];
 
   networking = {
     hostName = "basilius";
@@ -15,6 +15,8 @@ in {
       unmanaged = ["rndis0" "usb0"];
     };
   };
+
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Keep remote access available after switching to this configuration.
   mobile.adbd.enable = true;
@@ -48,13 +50,21 @@ in {
     enable = true;
   };
 
-  # Make subsequent nixos-rebuild invocations use this Mobile NixOS checkout
-  # and the Nixpkgs revision pinned by it.
-  nix.nixPath = [
-    "nixpkgs=${pinnedNixpkgs}"
-    "mobile-nixos=${mobileNixos}"
-    "nixos-config=/etc/nixos/configuration.nix"
-  ];
+  users.users.sandro = {
+    isNormalUser = true;
+    # Remove 'isSystemUser = true;' if it is present here
+    extraGroups = ["wheel" "networkmanager"]; # Add your desired groups
+  };
+  users.users.sandro.group = "sandro";
+  users.groups.sandro = {};
+
+#  # Make subsequent nixos-rebuild invocations use this Mobile NixOS checkout
+#  # and the Nixpkgs revision pinned by it.
+#  nix.nixPath = [
+#    "nixpkgs=${pinnedNixpkgs}"
+#    "mobile-nixos=${mobileNixos}"
+#    "nixos-config=/etc/nixos/configuration.nix"
+#  ];
 
   system.stateVersion = "26.11";
 }

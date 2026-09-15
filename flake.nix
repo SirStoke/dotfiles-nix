@@ -8,6 +8,11 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
+  inputs.mobile-nixos-nixpkgs = {
+    url = "github:mobile-nixos/mobile-nixos/development";
+    flake = false;
+  };
+
   inputs.flake-utils.url = "github:numtide/flake-utils";
 
   inputs.nix-alien.url = "github:thiagokokada/nix-alien/master";
@@ -26,6 +31,7 @@
     nix-alien,
     disko,
     agenix,
+    mobile-nixos-nixpkgs,
     ...
   } @ attrs:
     rec {
@@ -61,12 +67,66 @@
 
       nixosConfigurations.basilius = let
         system = "aarch64-linux";
+
+        npins = import "${mobile-nixos-nixpkgs}/npins";
+        npins-pkgs = npins.nixpkgs;
+        mobile-pkgs = import npins-pkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
+
+        # We need to use the pinned nixpkgs's version of everything
+        nixosSystem = args:
+          import "${npins-pkgs}/nixos/lib/eval-config.nix" (
+            {
+              lib = import "${npins-pkgs}/lib";
+              system = null;
+
+              modules =
+                args.modules
+                ++ [
+                  {
+                    nixpkgs.flake.source = npins-pkgs;
+                  }
+                ];
+            }
+            // builtins.removeAttrs args ["modules"]
+          );
+        mobile-nixos = import "${mobile-nixos-nixpkgs}/lib/configuration.nix";
       in
-        nixpkgs.lib.nixosSystem {
+        nixosSystem {
           inherit system;
 
           modules = [
+            (mobile-nixos {device = "oneplus-enchilada";})
+            # fix for the gt compilation failures
+            {
+              nixpkgs.overlays = [
+                (final: prev: {
+                  gadget-tool = prev.gadget-tool.overrideAttrs (old: {
+                    postPatch =
+                      (old.postPatch or "")
+                      + ''
+                        substituteInPlace CMakeLists.txt \
+                          --replace-fail \
+                            "cmake_minimum_required(VERSION 2.8)" \
+                            "cmake_minimum_required(VERSION 3.10)"
+                      '';
+                  });
+                })
+              ];
+            }
             ./basilius/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.sandro = import ./home.nix;
+              home-manager.extraSpecialArgs = {
+                recursiveUpdate = mobile-pkgs.lib.recursiveUpdate;
+                unstablePkgs = mobile-pkgs;
+              };
+            }
           ];
         };
 

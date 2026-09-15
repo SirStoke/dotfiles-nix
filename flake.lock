@@ -138,6 +138,23 @@
         "type": "github"
       }
     },
+    "mobile-nixos-nixpkgs": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1783912271,
+        "narHash": "sha256-CzwmiKxuh1u+H8hDnrVeUl/fL59PvsgLbr2l0FhqWK0=",
+        "owner": "mobile-nixos",
+        "repo": "mobile-nixos",
+        "rev": "2c132754323fc1915e8d21dcfc0ef68ab084c6fb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mobile-nixos",
+        "ref": "development",
+        "repo": "mobile-nixos",
+        "type": "github"
+      }
+    },
     "nix-alien": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -250,6 +267,7 @@
         "disko": "disko",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager_2",
+        "mobile-nixos-nixpkgs": "mobile-nixos-nixpkgs",
         "nix-alien": "nix-alien",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-unstable": "nixpkgs-unstable"
