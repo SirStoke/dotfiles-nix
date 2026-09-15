@@ -119,7 +119,7 @@
                   });
                 })
               ];
-     
+
               nixpkgs.config.allowUnfree = true;
             }
             ./basilius/configuration.nix

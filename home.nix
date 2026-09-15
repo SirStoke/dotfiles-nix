@@ -148,7 +148,7 @@ in {
 
   programs.git = {
     enable = true;
-    userEmail = "sandro.mosca.dev@gmail.com";
+    userEmail = "admin@sirstoke.me";
     userName = "SirStoke";
 
     signing.signByDefault = true;
