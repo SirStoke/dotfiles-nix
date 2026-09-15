@@ -2,6 +2,8 @@
   mobileNixos = /etc/nixos/mobile-nixos;
   pinnedNixpkgs = (import (mobileNixos + "/npins")).nixpkgs;
 in {
+  imports = [./services];
+
   #  imports = [
   #    (import (mobileNixos + "/lib/configuration.nix") {
   #      device = "oneplus-enchilada";
@@ -40,6 +42,10 @@ in {
   };
 
   environment.systemPackages = [];
+
+  virtualisation.containers.enable = true;
+  virtualisation.oci-containers.backend = "podman";
+  virtualisation.podman.enable = true;
 
   services.openssh = {
     enable = true;
