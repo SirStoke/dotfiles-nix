@@ -1,4 +1,4 @@
-{lib, ...}: let
+{lib,pkgs, ...}: let
   mobileNixos = /etc/nixos/mobile-nixos;
   pinnedNixpkgs = (import (mobileNixos + "/npins")).nixpkgs;
 in {
@@ -41,7 +41,10 @@ in {
     wheelNeedsPassword = lib.mkForce false;
   };
 
-  environment.systemPackages = [];
+  programs.zsh.enable = true;
+  environment.systemPackages = with pkgs; [wget clang unzip];
+
+  time.timeZone = "Europe/Madrid";
 
   virtualisation.containers.enable = true;
   virtualisation.oci-containers.backend = "podman";
@@ -60,9 +63,21 @@ in {
     isNormalUser = true;
     # Remove 'isSystemUser = true;' if it is present here
     extraGroups = ["wheel" "networkmanager"]; # Add your desired groups
+    shell = pkgs.zsh;
   };
+
   users.users.sandro.group = "sandro";
+
   users.groups.sandro = {};
+
+  users.groups.media = {
+    members = ["sandro"];
+  };
+
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
 
   #  # Make subsequent nixos-rebuild invocations use this Mobile NixOS checkout
   #  # and the Nixpkgs revision pinned by it.

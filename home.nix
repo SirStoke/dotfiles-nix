@@ -177,4 +177,15 @@ in {
 
   programs.direnv.enable = true;
   programs.direnv.package = pkgs.direnv.overrideAttrs (_: {doCheck = false;});
+
+  programs.gpg = {
+    enable = true;
+  };
+
+  services.gpg-agent = {
+    enable = true;
+    enableSshSupport = true;
+    pinentryPackage = pkgs.pinentry-curses;
+  };
+
 }
