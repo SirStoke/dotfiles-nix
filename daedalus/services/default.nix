@@ -9,7 +9,6 @@
     ./caddy
     ./deluge
     ./jackett
-    ./kimai
     ./plex
     ./jellyfin
     ./radarr
