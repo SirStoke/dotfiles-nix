@@ -2,11 +2,11 @@
   mobileNixos = /etc/nixos/mobile-nixos;
   pinnedNixpkgs = (import (mobileNixos + "/npins")).nixpkgs;
 in {
-#  imports = [
-#    (import (mobileNixos + "/lib/configuration.nix") {
-#      device = "oneplus-enchilada";
-#    })
-#  ];
+  #  imports = [
+  #    (import (mobileNixos + "/lib/configuration.nix") {
+  #      device = "oneplus-enchilada";
+  #    })
+  #  ];
 
   networking = {
     hostName = "basilius";
@@ -58,13 +58,13 @@ in {
   users.users.sandro.group = "sandro";
   users.groups.sandro = {};
 
-#  # Make subsequent nixos-rebuild invocations use this Mobile NixOS checkout
-#  # and the Nixpkgs revision pinned by it.
-#  nix.nixPath = [
-#    "nixpkgs=${pinnedNixpkgs}"
-#    "mobile-nixos=${mobileNixos}"
-#    "nixos-config=/etc/nixos/configuration.nix"
-#  ];
+  #  # Make subsequent nixos-rebuild invocations use this Mobile NixOS checkout
+  #  # and the Nixpkgs revision pinned by it.
+  #  nix.nixPath = [
+  #    "nixpkgs=${pinnedNixpkgs}"
+  #    "mobile-nixos=${mobileNixos}"
+  #    "nixos-config=/etc/nixos/configuration.nix"
+  #  ];
 
   system.stateVersion = "26.11";
 }

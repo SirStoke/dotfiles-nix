@@ -70,12 +70,15 @@
 
         npins = import "${mobile-nixos-nixpkgs}/npins";
         npins-pkgs = npins.nixpkgs;
+
         mobile-pkgs = import npins-pkgs {
           inherit system;
+
           config.allowUnfree = true;
         };
 
-        # We need to use the pinned nixpkgs's version of everything
+        # Setup our own version of nixos.lib.nixosSystem, as the
+        # mobile-nixos input is not actually a flake.
         nixosSystem = args:
           import "${npins-pkgs}/nixos/lib/eval-config.nix" (
             {
@@ -92,6 +95,7 @@
             }
             // builtins.removeAttrs args ["modules"]
           );
+
         mobile-nixos = import "${mobile-nixos-nixpkgs}/lib/configuration.nix";
       in
         nixosSystem {
