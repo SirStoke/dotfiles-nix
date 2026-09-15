@@ -1,10 +1,7 @@
-{ lib, ... }:
-
-let
+{lib, ...}: let
   mobileNixos = /etc/nixos/mobile-nixos;
   pinnedNixpkgs = (import (mobileNixos + "/npins")).nixpkgs;
-in
-{
+in {
   imports = [
     (import (mobileNixos + "/lib/configuration.nix") {
       device = "oneplus-enchilada";
@@ -15,7 +12,7 @@ in
     hostName = "basilius";
     networkmanager = {
       enable = true;
-      unmanaged = [ "rndis0" "usb0" ];
+      unmanaged = ["rndis0" "usb0"];
     };
   };
 
@@ -40,7 +37,7 @@ in
     wheelNeedsPassword = lib.mkForce false;
   };
 
-  environment.systemPackages = [ ];
+  environment.systemPackages = [];
 
   services.openssh = {
     enable = true;
@@ -61,4 +58,3 @@ in
 
   system.stateVersion = "26.11";
 }
-
