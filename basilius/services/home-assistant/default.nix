@@ -28,8 +28,8 @@
         "/etc/localtime:/etc/localtime:ro"
         "/run/dbus:/run/dbus:ro"
       ];
-      environment.TZ = "Europe/Amsterdam";
-      extraOptions = ["--privileged"];
+      environment.TZ = "Europe/Madrid";
+      extraOptions = ["--privileged" "--network=host"];
       autoStart = true;
     };
 
