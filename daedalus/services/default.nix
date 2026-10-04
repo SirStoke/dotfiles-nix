@@ -4,6 +4,7 @@
   ...
 }: {
   imports = [
+    ./airtrail
     ./baserow
     ./caddy
     ./deluge
@@ -12,6 +13,7 @@
     ./jellyfin
     ./radarr
     ./sonarr
+    ./unmanic
     ./bazarr
     # Toggl has restricted API usage,
     # will have to figure something out
@@ -19,7 +21,14 @@
     ./clickhouse
     ./otel-collector
     ./grafana
+    ./ha-api-proxy
+    ./hermes-agent
     ./prometheus-exporters
     ./mealie
+    ./anisette
+    ./nginx-cors
+    ./byparr
+    ./prowlarr
+    ./postgrest
   ];
 }

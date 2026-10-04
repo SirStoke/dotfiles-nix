@@ -10,8 +10,8 @@
   lib = pkgs.lib;
 in
   recursiveUpdate base {
-    home.homeDirectory = "/users/sandro.mosca";
-    home.username = "sandro.mosca";
+    home.homeDirectory = "/users/sandro";
+    home.username = "sandro";
     home.stateVersion = "22.11";
 
     home.file."/users/Sandro/Library/Preferences/clangd/config.yaml".text = ''
@@ -30,7 +30,6 @@ in
           iterm2
           inferno
           postgresql
-          jetbrains.idea-community
           gh
           powerline-fonts
           kubectx
@@ -64,6 +63,8 @@ in
 
         export EDITOR=nvim
         alias vim=nvim
+
+        export PATH="$HOME/.local/bin:$PATH"
       '';
 
     programs.git =
@@ -80,6 +81,8 @@ in
     programs.zsh.shellAliases = {
       hm-switch = "cd ~/src/dotfiles-nix && nix flake update && home-manager switch --flake .#sandro-darwin; cd -";
     };
+
+    programs.direnv.package = pkgs.direnv.overrideAttrs (_: {doCheck = false;});
 
     programs.gpg.enable = true;
 

@@ -28,6 +28,7 @@
       prometheus.config.scrape_configs = [
         (exporter "sonarr" 9708)
         (exporter "radarr" 9709)
+        (exporter "node" 9100)
         (exporter "systemd" 9558)
         (exporter "zfs" 9134)
         (exporter "deluge" 9354)

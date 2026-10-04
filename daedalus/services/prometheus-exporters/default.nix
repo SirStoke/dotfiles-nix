@@ -1,6 +1,16 @@
 {...}: {
-  services.prometheus.exporters.systemd.enable = true;
-  services.prometheus.exporters.zfs.enable = true;
+  services.prometheus.exporters = {
+    node = {
+      enable = true;
+      enabledCollectors = [
+        "cpu"
+        "meminfo"
+      ];
+    };
+
+    systemd.enable = true;
+    zfs.enable = true;
+  };
 
   virtualisation.oci-containers.containers = {
     deluge-exporter = {

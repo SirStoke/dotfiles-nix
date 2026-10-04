@@ -17,7 +17,6 @@ in
       ++ (with pkgs; [
         xclip
         signal-desktop
-        jetbrains.idea-community
         clang
         stylua
         unzip

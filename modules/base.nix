@@ -209,7 +209,7 @@ LABEL="probe_rs_rules_end"
   hardware.amdgpu.opencl.enable = true;
 
   services.desktopManager.plasma6.enable = true;
-  
+
   services.displayManager.sddm.enable = true;
 
   services.displayManager.sddm.autoLogin = {
@@ -285,7 +285,6 @@ LABEL="probe_rs_rules_end"
     networkmanager-strongswan
     networkmanager-vpnc
   ];
-
 
   programs.partition-manager.enable = true;
 
