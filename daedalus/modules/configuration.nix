@@ -64,6 +64,7 @@
     clang
     unzip
     ffmpeg
+    unison
   ];
 
   programs.zsh.enable = true;
