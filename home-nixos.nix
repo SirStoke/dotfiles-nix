@@ -36,12 +36,10 @@ in
         clang
         stylua
         unzip
-        nodePackages.typescript-language-server
         steamtinkerlaunch
         zoom-us
         pkgsi686Linux.vulkan-tools
         appimage-run
-        bambu-studio
         gimp2
       ])
       ++ (with unstablePkgs; [qbittorrent ghostty claude-code heroic godot])

@@ -223,6 +223,7 @@ LABEL="probe_rs_rules_end"
     btrfs-progs
     ollama
     deskflow
+    unison
   ];
 
   services.openssh.enable = true;
