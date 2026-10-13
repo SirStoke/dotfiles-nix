@@ -8,6 +8,7 @@ in {
   "toggled-docker-pwd.age".publicKeys = keys;
   "deluge-exporter-secrets.age".publicKeys = keys;
   "wireguard-config.age".publicKeys = keys;
+  "opencode-docker-pwd.age".publicKeys = keys;
   "sonarr-api-key.age".publicKeys = keys;
   "radarr-api-key.age".publicKeys = keys;
 }

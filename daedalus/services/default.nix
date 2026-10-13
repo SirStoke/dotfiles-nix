@@ -18,6 +18,7 @@
     # Toggl has restricted API usage,
     # will have to figure something out
     #./toggled
+    ./opencode
     ./clickhouse
     ./otel-collector
     ./grafana
