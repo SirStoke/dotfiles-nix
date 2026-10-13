@@ -187,5 +187,4 @@ in {
     enableSshSupport = true;
     pinentryPackage = pkgs.pinentry-curses;
   };
-
 }
