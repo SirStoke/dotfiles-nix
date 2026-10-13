@@ -8,6 +8,8 @@
   age.secrets.duplicity-secrets.file = ../duplicity-secrets.age;
   age.secrets.toggled-secrets.file = ../toggled-secrets.age;
   age.secrets.toggled-docker-pwd.file = ../toggled-docker-pwd.age;
+  age.secrets.opencode-docker-pwd.file = ../opencode-docker-pwd.age;
+  age.secrets.opencode-env.file = ../opencode-env.age;
   age.secrets.deluge-exporter-secrets.file = ../deluge-exporter-secrets.age;
   age.secrets.wireguard-config.file = ../wireguard-config.age;
 

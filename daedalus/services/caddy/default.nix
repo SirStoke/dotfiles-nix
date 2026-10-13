@@ -76,6 +76,7 @@ in {
       (virtualHost "anycors" 6868)
       (virtualHost "postgrest" 3001)
       (virtualHost "airtrail" 3002)
+      (loopbackVirtualHost "opencode" 4096)
       (serveStatic "static")
       (serveStatic "apps")
     ]);
