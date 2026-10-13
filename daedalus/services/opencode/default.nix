@@ -6,7 +6,7 @@
 }: {
   virtualisation.oci-containers.containers = {
     toggled = {
-      image = "ghcr.io/sirstoke/opencode-docker:c0d54b1366f15c12b0dda75f69efe063599ef2eb";
+      image = "ghcr.io/sirstoke/opencode-docker:latest";
 
       environmentFiles = [
         "/run/agenix/toggled-secrets"
