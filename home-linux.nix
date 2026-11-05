@@ -20,7 +20,7 @@ in
         clang
         stylua
         unzip
-        nodePackages.typescript-language-server
+        typescript-language-server
         appimage-run
       ])
       ++ (with unstablePkgs; [qbittorrent vscode-fhs]);
